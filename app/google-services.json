@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "525696939233",
+    "project_id": "tasteteaser-login-register",
+    "storage_bucket": "tasteteaser-login-register.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525696939233:android:b018474ace5a139d6f33a0",
+        "android_client_info": {
+          "package_name": "com.example.tasteteaser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNB-pf-NTC1rO9bOKqFDTokrJh59U2epo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

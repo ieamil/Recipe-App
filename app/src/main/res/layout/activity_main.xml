@@ -13,8 +13,11 @@
         android:layout_width="357dp"
         android:layout_height="462dp"
         app:srcCompat="@drawable/tasteteaserpng"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="3dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView" />
+
 
     <TextView
         android:id="@+id/textView"

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    android:background="#8BE8C486"
     android:orientation="vertical"
-    android:background="#fff"
-    android:padding="20dp">
+    android:padding="30dp"
+    tools:context=".Login">
 
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="152dp"
         android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/tasteteaserpng"
-        android:transitionName="logo_image"
-        android:layout_gravity="center_horizontal" />
+        android:transitionName="logo_image" />
 
 
     <TextView
@@ -50,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
-            app:hintTextColor="#000000" >
+            app:hintTextColor="#000000">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_editText"
@@ -66,7 +65,7 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:textColor="#000000"
-            app:passwordToggleEnabled="true" >
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_editText"
@@ -94,7 +93,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="#000"
-            android:text="LOGIN"
+            android:text="Sign In"
             android:textColor="#fff" />
 
         <Button
@@ -107,7 +106,7 @@
             android:background="#00000000"
             android:elevation="0dp"
             android:fontFamily="@font/average_sans"
-            android:text="Don't have an account? SIGN UP"
+            android:text="Don't have an account? Sign up"
             android:textColor="#000" />
 
         <Button
