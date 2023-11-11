@@ -12,17 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
-import com.google.firebase.auth.AuthResult;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 public class Login extends AppCompatActivity {
 
@@ -78,33 +72,14 @@ public class Login extends AppCompatActivity {
         String pass = password.getEditText().getText().toString().trim();
 
         if (!email.isEmpty() && !pass.isEmpty()) {
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            String emailLink = getIntent().getData() != null ? getIntent().getData().toString() : "";
-
-            if (auth.isSignInWithEmailLink(emailLink)) {
-                // E-posta bağlantısı ile oturum açma yöntemini kullan
-                auth.signInWithEmailLink(email, emailLink)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    checkEmailVerification();
-                                } else {
-                                    Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            } else {
-                // E-posta bağlantısı yoksa, diğer oturum açma yöntemini kullanabilirsiniz
-                auth.signInWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener(this, task -> {
-                            if (task.isSuccessful()) {
-                                checkEmailVerification();
-                            } else {
-                                Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
+            firebaseAuth.signInWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            checkEmailVerification();
+                        } else {
+                            Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         } else {
             Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
         }
@@ -118,16 +93,13 @@ public class Login extends AppCompatActivity {
 
     private void checkEmailVerification() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser != null) {
-            if (firebaseUser.isEmailVerified()) {
-                startActivity(new Intent(Login.this, HomeActivity.class));
-                finish();
-            } else {
-                Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show();
-                firebaseAuth.signOut();
-            }
+        if (firebaseUser != null && firebaseUser.isEmailVerified()) {
+            // Giriş yapıldıktan sonra HomeActivity'e yönlendir.
+            startActivity(new Intent(Login.this, HomeActivity.class));
+            finish();
         } else {
-            Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
         }
     }
 }
