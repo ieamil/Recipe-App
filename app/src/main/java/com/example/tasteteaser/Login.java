@@ -1,5 +1,6 @@
 package com.example.tasteteaser;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
@@ -20,13 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    Button callSignUp, login_btn, continueWithoutAccountBtn;
+    Button callSignUp, login_btn, continueWithoutAccountBtn, forgot_password_button;
     ImageView image;
     TextView logoText, sloganText;
     TextInputLayout username, password;
 
     private FirebaseAuth firebaseAuth;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,8 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
         login_btn = findViewById(R.id.login_btn);
         continueWithoutAccountBtn = findViewById(R.id.continue_without_account_btn);
+        forgot_password_button = findViewById(R.id.forgot_password_btn);
+
 
         callSignUp.setOnClickListener(view -> {
             Intent intent = new Intent(Login.this, SignUp.class);
@@ -62,10 +66,18 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        forgot_password_button.setOnClickListener(view -> forgotPasswordActivity());
+
         login_btn.setOnClickListener(view -> loginUser());
 
         continueWithoutAccountBtn.setOnClickListener(view -> continueWithoutAccount());
     }
+
+    private void forgotPasswordActivity() {
+        Intent intent = new Intent(Login.this, ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
+
 
     private void loginUser() {
         String email = username.getEditText().getText().toString().trim();

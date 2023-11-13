@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BE8C486"
+    android:background="#B0E8C486"
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".Login">
+
 
     <ImageView
         android:id="@+id/logoImage"
@@ -129,10 +130,10 @@
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#FF894F37"
             android:fontFamily="@font/average_sans"
+            android:onClick="continueWithoutAccount"
             android:text="Continue without account..."
             android:textColor="#FFF"
-            app:rippleColor="#FDFDFD"
-            android:onClick="continueWithoutAccount" />
+            app:rippleColor="#FDFDFD" />
 
     </LinearLayout>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BE8C486"
+    android:background="#B0E8C486"
     tools:context=".SignUp">
 
     <ImageView
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/average_sans"
         android:text="Already registered, Sign In !"
-        android:textColor="@color/brown"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
