@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B0E8C486"
+    android:background="@drawable/bg1"
+    android:backgroundTintMode="add"
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".Login">
@@ -16,7 +17,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:scrollbarDefaultDelayBeforeFade="400"
-        android:src="@drawable/tasteteaserpng"
+        android:src="@drawable/ttpng"
         android:transitionName="logo_image" />
 
     <TextView
@@ -26,7 +27,7 @@
         android:fontFamily="@font/allan"
         android:gravity="center_horizontal"
         android:text="Welcome back cook!"
-        android:textColor="#894F37"
+        android:textColor="#FFFFFF"
         android:textSize="48sp"
         android:transitionName="logo_text" />
 
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/average_sans"
         android:text="Log in for more features! "
-        android:textColor="#894F37"
+        android:textColor="#FFFFFF"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -52,14 +53,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-mail"
-            app:hintTextColor="#000000">
+            android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:textColor="#6C3A25" />
+                android:textColorHint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,15 +69,19 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:textColor="#000000"
+            android:textColorHint="@color/white"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:breakStrategy="simple"
                 android:gravity="top"
                 android:inputType="textPassword"
-                android:textColor="#6C3A25" />
+                android:shadowColor="#FFFFFF"
+                android:textColor="#FFF"
+                android:textColorHint="#FFFFFF" />
 
             <Button
                 android:id="@+id/forgot_password_btn"
@@ -84,13 +89,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_margin="5dp"
-                android:backgroundTint="#F1DCBC"
+                android:backgroundTint="#171719"
                 android:elevation="0dp"
                 android:fontFamily="@font/average_sans"
                 android:minWidth="150dp"
                 android:minHeight="48dp"
                 android:text="Forget Password?"
-                android:textColor="#6C3A25"
+                android:textColor="#FFF"
                 android:textSize="16sp"
                 app:iconPadding="2dp" />
 
@@ -103,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:backgroundTint="#FF894F37"
+            android:backgroundTint="#171719"
             android:fontFamily="@font/average_sans"
             android:text="Sign In"
             android:textColor="#FFF"
@@ -117,22 +122,22 @@
             android:layout_gravity="right"
             android:layout_margin="5dp"
             android:layout_marginBottom="5dp"
-            android:backgroundTint="#FF894F37"
+            android:backgroundTint="#171719"
             android:elevation="0dp"
             android:fontFamily="@font/average_sans"
             android:text="Don't have an account? Sign up"
-            android:textColor="#FFF" />
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/continue_without_account_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#FF894F37"
+            android:backgroundTint="#171719"
             android:fontFamily="@font/average_sans"
             android:onClick="continueWithoutAccount"
             android:text="Continue without account..."
-            android:textColor="#FFF"
+            android:textColor="#FFFFFF"
             app:rippleColor="#FDFDFD" />
 
     </LinearLayout>

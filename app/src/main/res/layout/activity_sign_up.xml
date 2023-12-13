@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B0E8C486"
+    android:background="#74000000"
     tools:context=".SignUp">
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_width="170dp"
         android:layout_height="177dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/tasteteaserpng"
+        android:src="@drawable/ttpng"
         android:transitionName="logo_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             android:fontFamily="@font/average_sans"
             android:hint="Type your email"
             android:inputType="textEmailAddress"
-            android:textColor="#6C3A25" />
+            android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +61,7 @@
             android:fontFamily="@font/average_sans"
             android:hint="Type your password"
             android:inputType="textPassword"
-            android:textColor="#6C3A25" />
+            android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -83,7 +83,7 @@
             android:fontFamily="@font/average_sans"
             android:hint="Retype your password"
             android:inputType="textPassword"
-            android:textColor="#6C3A25" />
+            android:textColorHint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -91,9 +91,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:background="#874F37"
+        android:background="#171719"
         android:fontFamily="@font/average_sans"
-        android:shadowColor="#651A1A"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textColor="@color/white"

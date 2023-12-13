@@ -15,7 +15,7 @@
 
         <activity
             android:name=".Login"
-            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle"
+            android:theme="@style/Base.Theme.TasteTeaser"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="sensor"
             android:exported="true">
@@ -63,6 +63,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.tasteteaser.SplashActivity" />
 
 
         <meta-data

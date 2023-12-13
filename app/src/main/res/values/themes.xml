@@ -6,9 +6,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+
     <style name="Theme.TasteTeaser" parent="Base.Theme.TasteTeaser"
         />
     <style name="Base.Theme.TasteTeaser.BackgroundImageStyle" >
-        <item name = "android:windowBackground">@drawable/image2</item>
+        <item name = "android:windowBackground">@drawable/bg1</item>
     </style>
 </resources>

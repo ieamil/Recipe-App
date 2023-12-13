@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -106,8 +105,7 @@ public class Login extends AppCompatActivity {
     private void checkEmailVerification() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null && firebaseUser.isEmailVerified()) {
-            // Giriş yapıldıktan sonra HomeActivity'e yönlendir.
-            startActivity(new Intent(Login.this, HomeActivity.class));
+            startActivity(new Intent(Login.this, SplashActivity.class));
             finish();
         } else {
             Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show();
