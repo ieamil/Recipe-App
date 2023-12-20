@@ -53,6 +53,11 @@ android {
 dependencies {
     implementation ("androidx.room:room-runtime:$rootProject.ext.room_version")
     implementation("androidx.room:room-common:2.6.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.navigation:navigation-fragment:2.5.3")
+    implementation("androidx.navigation:navigation-ui:2.5.3")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     annotationProcessor ("androidx.room:room-compiler:$rootProject.ext.room_version")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.android.material:material:1.10.0")
@@ -77,7 +82,6 @@ dependencies {
 
     implementation ("com.makeramen:roundedimageview:2.3.0")
 
-    implementation ("pub.devrel:easypermissions:3.1.0")
     implementation ("com.google.android.material:material:1.2.1")
     //circle image view
     implementation ("de.hdodenhof:circleimageview:3.1.0")
@@ -106,7 +110,6 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.11.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
-
 
 
 }

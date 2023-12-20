@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TasteTeaser" parent="Theme.Material3.DayNight.NoActionBar">
 
+
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
@@ -12,4 +13,10 @@
     <style name="Base.Theme.TasteTeaser.BackgroundImageStyle" >
         <item name = "android:windowBackground">@drawable/bg1</item>
     </style>
+    <style name="Theme.TasteTeaser.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.TasteTeaser.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.TasteTeaser.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

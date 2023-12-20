@@ -12,59 +12,54 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TasteTeaser"
         tools:targetApi="31" >
-
+        <activity
+            android:name=".nav_menu"
+            android:exported="false"
+            android:label="@string/title_activity_nav_menu"
+            android:theme="@style/Theme.TasteTeaser.NoActionBar" />
         <activity
             android:name=".Login"
-            android:theme="@style/Base.Theme.TasteTeaser"
             android:configChanges="orientation|screenSize"
+            android:exported="true"
             android:screenOrientation="sensor"
-            android:exported="true">
-
+            android:theme="@style/Base.Theme.TasteTeaser" >
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="true" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SignUp"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="sensor"
-            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle"
-            android:exported="false" >
-
-        </activity>
-
-        <activity
-
-            android:name=".ForgotPasswordActivity"
-            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle"
             android:exported="false"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="sensor" >
-
-        </activity>
-
-
-        <activity android:name=".HomeActivity"
-            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle"
-            android:configChanges="orientation|screenSize"
             android:screenOrientation="sensor"
-            android:exported="true">
+            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle" >
+        </activity>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="sensor"
+            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle" >
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="sensor"
+            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.tasteteaser.SplashActivity" />
-
+        <activity android:name=".SplashActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
