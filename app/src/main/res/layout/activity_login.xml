@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
+    android:background="@drawable/mobilebg"
     android:backgroundTintMode="add"
     android:orientation="vertical"
     android:padding="30dp"
@@ -13,29 +13,30 @@
 
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="152dp"
-        android:layout_height="150dp"
+        android:layout_width="188dp"
+        android:layout_height="171dp"
         android:layout_gravity="center_horizontal"
         android:scrollbarDefaultDelayBeforeFade="400"
-        android:src="@drawable/ttpng"
+        android:src="@drawable/TasteTeaserLogoLetterPngWhiteBig"
         android:transitionName="logo_image" />
 
     <TextView
         android:id="@+id/logo_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/allan"
         android:gravity="center_horizontal"
         android:text="Welcome back cook!"
         android:textColor="#FFFFFF"
-        android:textSize="48sp"
+        android:textSize="36sp"
         android:transitionName="logo_text" />
 
     <TextView
         android:id="@+id/slogan_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/average_sans"
+        android:gravity="center_horizontal"
         android:text="Log in for more features! "
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
@@ -53,14 +54,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-mail"
-            android:textColorHint="@color/white">
+            android:textColorHint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -69,7 +70,7 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:textColor="#000000"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/black"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,9 +80,9 @@
                 android:breakStrategy="simple"
                 android:gravity="top"
                 android:inputType="textPassword"
-                android:shadowColor="#FFFFFF"
-                android:textColor="#FFF"
-                android:textColorHint="#FFFFFF" />
+                android:shadowColor="#000000"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
 
             <Button
                 android:id="@+id/forgot_password_btn"
@@ -95,7 +96,7 @@
                 android:minWidth="150dp"
                 android:minHeight="48dp"
                 android:text="Forget Password?"
-                android:textColor="#FFF"
+                android:textColor="#FFF1F1"
                 android:textSize="16sp"
                 app:iconPadding="2dp" />
 

@@ -23,7 +23,7 @@
                 android:background="@color/black"
                 app:title="Navigation Drawer"
                 app:titleTextColor="@color/white"
-                app:navigationIcon="@drawable/bg1"
+                app:navigationIcon="@drawable/block_black"
                 app:menu="@menu/nav_menu"/>
 
         </com.google.android.material.appbar.AppBarLayout>
