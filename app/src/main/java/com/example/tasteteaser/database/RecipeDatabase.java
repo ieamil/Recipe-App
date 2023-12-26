@@ -1,6 +1,5 @@
 package com.example.tasteteaser.database;
 
-
 import android.content.Context;
 
 import androidx.room.Database;

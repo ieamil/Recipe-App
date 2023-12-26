@@ -7,8 +7,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tasteteaser.adapter.MainCategoryAdapter;
-import com.example.tasteteaser.adapter.SubCategoryAdapter;
 import com.example.tasteteaser.database.RecipeDatabase;
 import com.example.tasteteaser.entities.CategoryItems;
 import com.example.tasteteaser.entities.MealsItems;

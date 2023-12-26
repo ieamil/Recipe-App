@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,100 +10,112 @@
 
     <RelativeLayout
         android:id="@+id/rectangleContainer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/black">
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/menuIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/ic_menu_white"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_centerVertical="true"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_marginStart="16dp"
+            app:layout_marginTop="10dp" />
+
 
         <ImageView
             android:id="@+id/appLogo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/tasteteasernamewhite"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:src="@drawable/TasteTeaserLogoLetterPngWhiteBig"
+            app:layout_constraintStart_toEndOf="@+id/menuIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </RelativeLayout>
 
-
-    <ScrollView
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangleContainer">
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchTextET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:hint="Search your favourite Recipe" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/average_sans"
-                android:padding="50dp"
-                android:text="All Recipes"
-                android:textColor="@color/black"
-                android:textSize="34sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                app:cardElevation="@dimen/_10sdp">
+    <TextView
+        android:id="@+id/tv_fvrt_meal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="234dp"
+        android:text="Categories"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchText" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favourite_meal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_fvrt_meal"/>
 
-                <SearchView
-                    android:id="@+id/search_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/black"
-                    android:iconifiedByDefault="false"
-                    android:queryBackground="@color/black"
-                    android:queryHint="Search for recipes"
-                    android:theme="@style/Theme.Material3.DynamicColors.Dark" />
+    <TextView
+        android:id="@+id/tv_populars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Populars Recipes"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/rv_favourite_meal"
+        app:layout_constraintTop_toBottomOf="@+id/rv_favourite_meal"
+        />
 
-            </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_populars"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_populars" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_main_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:orientation="horizontal"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_rv_main_category" />
-
-            <TextView
-                android:id="@+id/tvCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/average_sans"
-                android:paddingStart="@dimen/_10sdp"
-                android:text="Category name"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_sub_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:orientation="horizontal"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_rv_sub_category" />
-
-
-        </LinearLayout>
-    </ScrollView>
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
     <style name="Theme.TasteTeaser" parent="Base.Theme.TasteTeaser"
         />
     <style name="Base.Theme.TasteTeaser.BackgroundImageStyle" >
-        <item name = "android:windowBackground">@drawable/bg1</item>
+        <item name = "android:windowBackground">@drawable/mobilebg</item>
     </style>
     <style name="Theme.TasteTeaser.NoActionBar">
         <item name="windowActionBar">false</item>
