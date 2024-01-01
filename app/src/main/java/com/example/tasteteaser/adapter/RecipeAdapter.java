@@ -8,9 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tasteteaser.R;
 import com.example.tasteteaser.databinding.ItemRecipeBinding;
+import com.example.tasteteaser.models.Recipe;
+
+import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
+    //category için ayrı mı oluşturmam lazım emin olamadım bu kısımlarda
+    //muhtemelen ayrı açmak gerekiyor evet :C
+    //category adapter oluşturup home fragmentte food categoriesi ona göre eklemem gerekiyor ama aynı zamanda değişmez olmalı,
+    //ama oraya güncellenebilir ekliyoruz?
+
+    List<Recipe> recipeList;
+
+    public void setRecipeList(List<Recipe> recipeList){
+        this.recipeList =recipeList;
+    }
     @NonNull
     @Override
     public RecipeAdapter.RecipeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -19,12 +33,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapter.RecipeHolder holder, int position) {
-        holder.onBind();
+        Recipe recipe = recipeList.get(position);
+        holder.onBind(recipe);
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return recipeList.size();
     }
 
     public class RecipeHolder extends RecyclerView.ViewHolder {
@@ -33,8 +48,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
             super(itemView.getRoot());
             binding = itemView;
         }
-        public void onBind(){
-
+        public void onBind(Recipe recipe){
+            binding.bgImgRecipe.setImageResource(recipe.getImage().equalsIgnoreCase("meatrecipe") ?
+                    R.drawable.meatrecipe : R.drawable.meatr);
+            binding.tvRecipeName.setText(recipe.getName());
         }
     }
 }

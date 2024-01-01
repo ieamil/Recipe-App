@@ -105,7 +105,8 @@ public class Login extends AppCompatActivity {
     private void checkEmailVerification() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null && firebaseUser.isEmailVerified()) {
-            startActivity(new Intent(Login.this, SplashActivity.class));
+            // Giriş yapıldıktan sonra HomeActivity'e yönlendir.
+            startActivity(new Intent(Login.this, HomeActivity.class));
             finish();
         } else {
             Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show();

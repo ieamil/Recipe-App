@@ -32,7 +32,6 @@ public class SignUp extends AppCompatActivity {
         binding.button.setOnClickListener(v -> {
             String email = binding.emailEt.getText().toString();
             String pass = binding.passET.getText().toString();
-            String username = binding.usernameET.getText().toString();
             String confirmPass = binding.confirmPassEt.getText().toString();
 
             if (!email.isEmpty() && !pass.isEmpty() && !confirmPass.isEmpty()) {

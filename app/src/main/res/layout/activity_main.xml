@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="379dp"
-        android:layout_height="480dp"
+        android:layout_width="326dp"
+        android:layout_height="414dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/textView"
         android:layout_width="309dp"
         android:layout_height="41dp"
-        android:layout_marginTop="584dp"
+        android:layout_marginTop="588dp"
         android:fontFamily="@font/allan"
         android:text="Which dish would you like to cook today?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
