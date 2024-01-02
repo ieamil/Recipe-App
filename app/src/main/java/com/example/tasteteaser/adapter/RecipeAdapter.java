@@ -17,9 +17,7 @@ import java.util.List;
 // Adapter for displaying recipes in a RecyclerView
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
     //category için ayrı mı oluşturmam lazım emin olamadım bu kısımlarda
-    //muhtemelen ayrı açmak gerekiyor evet :C
     //category adapter oluşturup home fragmentte food categoriesi ona göre eklemem gerekiyor ama aynı zamanda değişmez olmalı,
-    //ama oraya güncellenebilir ekliyoruz?
 
     List<Recipe> recipeList;
 

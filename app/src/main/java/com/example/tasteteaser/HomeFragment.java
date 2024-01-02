@@ -16,7 +16,6 @@ import com.example.tasteteaser.models.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-//activity_home buraya
 public class HomeFragment extends Fragment {
     private ActivityHomeBinding binding;
     List<Recipe> foodCategories;
@@ -36,7 +35,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadPopularRecipes() {
-        binding.rvPopulars.setAdapter(new RecipeAdapter());
+        binding.rvPopulars.setAdapter(new RecipeAdapter()); //Category Adapter yapacağız burayı
         popularRecipes = new ArrayList<>();
         popularRecipes.add(new Recipe("1","Popular One","meatrecipe","null","Popular",
                 "null","","","",""));
