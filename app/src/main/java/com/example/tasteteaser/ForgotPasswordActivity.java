@@ -16,15 +16,17 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+// Activity for handling the "Forgot Password" functionality
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    //Declaration
+    //Declaration of UI elememts
     Button btnReset, btnBack;
     EditText edtEmail;
     ProgressBar progressBar;
     FirebaseAuth mAuth;
     String strEmail;
 
+    // Initialization of UI elements and setting click listeners
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -61,6 +63,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
 
     }
+
+    // Method to handle the password reset process
     private void ResetPassword(){
         progressBar.setVisibility(View.VISIBLE);
         btnReset.setVisibility(View.INVISIBLE);

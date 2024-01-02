@@ -5,13 +5,18 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+// Main activity representing the home screen
 public class HomeActivity extends AppCompatActivity {
+
+    // Creation of the activity and setting the content view
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home); // Eğer bir layout kullanacaksanız, bu kısmı layout adınıza göre düzenleyin.
     }
 
+    // Handling the back button press to navigate to the previous screen
     @Override
     public void onBackPressed() {
         // Bu metod geri tuşuna basıldığında çağrılır.

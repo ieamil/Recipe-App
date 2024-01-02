@@ -1,8 +1,11 @@
 package com.example.tasteteaser.models;
 
+// Model class representing a recipe
 public class Recipe {
+    //Properties
     protected String id, name, image, description, category, instructions, ingredients, calories, time, servings;
 
+    //Constructor
     public Recipe(String id, String name, String image, String description, String category, String instructions, String ingredients, String calories, String time, String servings) {
         this.id = id;
         this.name = name;
@@ -16,6 +19,7 @@ public class Recipe {
         this.servings = servings;
     }
 
+    //Getter and setter methods
     public String getId() {
         return id;
     }
