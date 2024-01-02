@@ -1,8 +1,10 @@
 package com.example.tasteteaser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,13 +23,17 @@ public class NavMainActivity extends AppCompatActivity {
     MaterialToolbar materialToolbar;
     FrameLayout frameLayout;
     NavigationView navigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null){
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
+        boolean isUserLogged = intent.getBooleanExtra("isUserLogged" , false);
+        if(isUserLogged){
             navigationView = findViewById(R.id.navigationView);
+            TextView userNicknameTextView = navigationView.findViewById(R.id.userNickname);
+            userNicknameTextView.setText(email);
             setContentView(R.layout.nav_activity_main);
         }else{
             navigationView = findViewById(R.id.nonAccountNavigationView);
@@ -52,7 +58,7 @@ public class NavMainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(currentUser != null){
+                if(isUserLogged){
                     if (item.getItemId() == R.id.nav_home) {
                         Toast.makeText(NavMainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawer(GravityCompat.START);}
@@ -74,7 +80,7 @@ public class NavMainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
 
                     }
-                    return false;
+
                 }else{
                     if (item.getItemId() == R.id.nav_home) {
                         Toast.makeText(NavMainActivity.this, "Home", Toast.LENGTH_SHORT).show();
@@ -84,9 +90,9 @@ public class NavMainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
 
                     }
-                    return false;
-                }
 
+                }
+                return false;
             }
         });
     }

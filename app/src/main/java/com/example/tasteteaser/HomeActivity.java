@@ -2,6 +2,7 @@ package com.example.tasteteaser;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,12 +21,23 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ImageView menuIcon;
     private NavigationView navigationView;
-
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        /*
+        Intent loginIntent = getIntent();
+        boolean isUserLogged = loginIntent.getBooleanExtra("isUserLogged" , false);
+        Log.d("isUserLogged" , String.valueOf(isUserLogged));
+        if(isUserLogged){
+            navigationView = findViewById(R.id.navigationView);
+        }else{
+            navigationView = findViewById(R.id.nonAccountNavigationView);
+            Log.d("Navigationasdasd", String.valueOf(navigationView));
+        }
+*/
 
+        setContentView(R.layout.activity_home);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment())
@@ -34,20 +46,13 @@ public class HomeActivity extends AppCompatActivity {
         // DrawerLayout, menuIcon ve NavigationView'u tanımla
         drawerLayout = findViewById(R.id.drawerLayout);
         menuIcon = findViewById(R.id.menuIcon);
-
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null){
-            navigationView = findViewById(R.id.navigationView);
-        }else{
-            navigationView = findViewById(R.id.nonAccountNavigationView);
-        }
+        navigationView = findViewById(R.id.navigationView);
 
         // menuIcon click listener
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Drawer'ı aç/kapat
-
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
@@ -57,6 +62,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // NavigationView click listener
+
+        // NavigationView içindeki menu öğelerine tıklama olayını dinle
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -90,7 +97,6 @@ public class HomeActivity extends AppCompatActivity {
         // Return LoginActivity
         Intent intent = new Intent(HomeActivity.this, Login.class);
         startActivity(intent);
-        finish(); // HomeActivity'yi kapat
     }
 
     // Diğer metotlar buraya gelicek

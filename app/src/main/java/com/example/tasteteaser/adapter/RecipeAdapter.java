@@ -60,9 +60,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
         // Binds data to the views in each recipe item
         public void onBind(Recipe recipe){
-            binding.bgImgRecipe.setImageResource(recipe.getImage().equalsIgnoreCase("meatrecipe") ?
+            binding.imgDish.setImageResource(recipe.getImage().equalsIgnoreCase("meatrecipe") ?
                     R.drawable.meatrecipe : R.drawable.meatr);
-            binding.tvRecipeName.setText(recipe.getName());
+            binding.tvDishName.setText(recipe.getName());
         }
     }
 }
