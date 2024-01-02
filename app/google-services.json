@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "525696939233",
+    "firebase_url": "https://tasteteaser-login-register-default-rtdb.firebaseio.com",
     "project_id": "tasteteaser-login-register",
     "storage_bucket": "tasteteaser-login-register.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.tasteteaser"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "525696939233-e9el1tcsd65tenrojvap2k4r2mrrqbkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tasteteaser",
+            "certificate_hash": "2b3a660c075a58796955e96f10063329d4b0de0b"
+          }
+        },
+        {
+          "client_id": "525696939233-v4iejk356sksgtknnsfjgnr8v03sjb6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBNB-pf-NTC1rO9bOKqFDTokrJh59U2epo"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525696939233-v4iejk356sksgtknnsfjgnr8v03sjb6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
