@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Drawer'ı aç/kapat
-
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
@@ -47,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         // NavigationView içindeki menu öğelerine tıklama olayını dinle
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

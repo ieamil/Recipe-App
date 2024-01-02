@@ -23,29 +23,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/menuIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_menu_white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="Open the menu"
-                />
-
-
-            <ImageView
                 android:id="@+id/appLogo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/taste_teaser_logo_letter_png_white_big"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/menuIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </RelativeLayout>
@@ -161,6 +146,18 @@
             app:layout_constraintStart_toEndOf="@+id/tv_populars"
             app:layout_constraintTop_toTopOf="@+id/tv_populars" />
 
+        <ImageView
+            android:id="@+id/menuIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:contentDescription="Open the menu"
+            android:focusable="true"
+            android:src="@drawable/ic_menu_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -171,5 +168,6 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/header_menu"/>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
