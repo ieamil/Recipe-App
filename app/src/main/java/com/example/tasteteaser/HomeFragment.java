@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
     private void loadFoodCategories() {
         binding.rvFoodCategories.setAdapter(new CategoryAdapter());
         foodCategories =new ArrayList<>();
-        foodCategories.add(new Category("1" , "Meat" ));
+        foodCategories.add(new Category("1" , "Meat" , "bg_img_recipe"));
         CategoryAdapter categoryAdapter = (CategoryAdapter) binding.rvFoodCategories.getAdapter();
         if (categoryAdapter != null){
             categoryAdapter.setCategoryList(foodCategories);

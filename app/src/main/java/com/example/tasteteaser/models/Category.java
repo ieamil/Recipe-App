@@ -5,9 +5,10 @@ public class Category {
     private String id, name , image;
 
     //Getter and setter methods
-    public Category(String id, String name){
+    public Category(String id, String name , String image){
         this.id =id;
         this.name =name;
+        this.image = image;
     }
 
     public String getId() {

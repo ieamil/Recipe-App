@@ -24,7 +24,6 @@ public class Login extends AppCompatActivity {
     ImageView image;
     TextView logoText, sloganText;
     TextInputLayout username, password;
-    boolean isUserLogged = false;
 
     private FirebaseAuth firebaseAuth;
 
@@ -83,7 +82,6 @@ public class Login extends AppCompatActivity {
         String email = username.getEditText().getText().toString().trim();
         String pass = password.getEditText().getText().toString().trim();
 
-
         if (!email.isEmpty() && !pass.isEmpty()) {
             firebaseAuth.signInWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, task -> {
@@ -96,11 +94,14 @@ public class Login extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
         }
+        /*
         Intent navIntent = new Intent(Login.this , NavMainActivity.class);
         navIntent.putExtra("email" , email);
         navIntent.putExtra("isUserLogged" , isUserLogged);
         Intent homeIntent = new Intent(Login.this , HomeActivity.class);
         homeIntent.putExtra("isUserLogged" , isUserLogged);
+
+         */
     }
 
     private void continueWithoutAccount() {

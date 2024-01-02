@@ -2,7 +2,6 @@ package com.example.tasteteaser;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,10 +20,28 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ImageView menuIcon;
     private NavigationView navigationView;
-    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment())
+                    .commit();
+        }
+        // DrawerLayout, menuIcon ve NavigationView'u tanımla
+        drawerLayout = findViewById(R.id.drawerLayout);
+        menuIcon = findViewById(R.id.menuIcon);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            navigationView = findViewById(R.id.navigationView);
+        }else{
+            navigationView = findViewById(R.id.nonAccountNavigationView);
+        }
+
         /*
         Intent loginIntent = getIntent();
         boolean isUserLogged = loginIntent.getBooleanExtra("isUserLogged" , false);
@@ -36,17 +53,6 @@ public class HomeActivity extends AppCompatActivity {
             Log.d("Navigationasdasd", String.valueOf(navigationView));
         }
 */
-
-        setContentView(R.layout.activity_home);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment())
-                    .commit();
-        }
-        // DrawerLayout, menuIcon ve NavigationView'u tanımla
-        drawerLayout = findViewById(R.id.drawerLayout);
-        menuIcon = findViewById(R.id.menuIcon);
-        navigationView = findViewById(R.id.navigationView);
 
         // menuIcon click listener
         menuIcon.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +67,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        // NavigationView click listener
-
-        // NavigationView içindeki menu öğelerine tıklama olayını dinle
 
         // NavigationView içindeki menu öğelerine tıklama olayını dinle
         // NavigationView click listener
@@ -118,6 +121,7 @@ public class HomeActivity extends AppCompatActivity {
         // Return LoginActivity
         Intent intent = new Intent(HomeActivity.this, Login.class);
         startActivity(intent);
+        finish(); // HomeActivity'yi kapat
     }
 
     // Diğer metotlar buraya gelicek
