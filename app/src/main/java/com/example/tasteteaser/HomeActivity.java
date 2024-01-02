@@ -8,13 +8,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
-
-// Main activity representing the home screen
-public class HomeActivity extends AppCompatActivity {
-
-    // Creation of the activity and setting the content view
-=======
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -26,7 +19,6 @@ public class HomeActivity extends AppCompatActivity {
     private ImageView menuIcon;
     private NavigationView navigationView;
 
->>>>>>> aec3f96b0f399ef4b9003d4af9227d0ca7cfffea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,19 +68,10 @@ public class HomeActivity extends AppCompatActivity {
         // Diğer gerekli başlangıç işlemleri...
     }
 
-<<<<<<< HEAD
-    // Handling the back button press to navigate to the previous screen
-    @Override
-    public void onBackPressed() {
-        // Bu metod geri tuşuna basıldığında çağrılır.
-        // Buraya kullanıcıyı bir önceki sayfaya yönlendirmek için gerekli kodu ekleyin.
-        Intent intent = new Intent(this, MainActivity.class);
-=======
     // HomeActivity'e geçiş yapacak metot
     private void goToHomeActivity() {
         // HomeActivity'ye geçiş yap
         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
->>>>>>> aec3f96b0f399ef4b9003d4af9227d0ca7cfffea
         startActivity(intent);
         // İsterseniz bu satırı ekleyerek HomeActivity'nin üzerindeki diğer tüm aktiviteleri kapatabilirsiniz
         // finishAffinity();

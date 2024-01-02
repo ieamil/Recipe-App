@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/nav_home"
+        android:layout_width= "wrap_content"
+        android:layout_height= "wrap_content"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/nav_account"
+        android:layout_width= "wrap_content"
+        android:layout_height= "wrap_content"
+        android:title="Account" />
+
+    <item
+        android:id="@+id/nav_recipe"
+        android:icon="@drawable/nav_home"
+        android:layout_width= "wrap_content"
+        android:layout_height= "wrap_content"
+        android:title="Add Recipe" />
+
+    <item
+        android:id="@+id/nav_recorded"
+        android:icon="@drawable/nav_bookmark"
+        android:layout_width= "wrap_content"
+        android:layout_height= "wrap_content"
+        android:title="Recorded" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/nav_logout"
+        android:layout_width= "wrap_content"
+        android:layout_height= "wrap_content"
+        android:title="Sign In" />
+
+
+</menu>
