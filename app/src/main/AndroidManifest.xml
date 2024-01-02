@@ -13,11 +13,6 @@
         android:theme="@style/Theme.TasteTeaser"
         tools:targetApi="31" >
         <activity
-            android:name=".nav_menu"
-            android:exported="false"
-            android:label="@string/title_activity_nav_menu"
-            android:theme="@style/Theme.TasteTeaser.NoActionBar" />
-        <activity
             android:name=".Login"
             android:configChanges="orientation|screenSize"
             android:exported="true"
@@ -59,7 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
+
 
         <meta-data
             android:name="preloaded_fonts"
