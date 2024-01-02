@@ -99,6 +99,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_food_ctg"/>
 
+
         <TextView
             android:id="@+id/tv_populars"
             android:layout_width="wrap_content"
@@ -111,6 +112,15 @@
             app:layout_constraintStart_toStartOf="@+id/rv_food_categories"
             app:layout_constraintTop_toBottomOf="@+id/rv_food_categories"
             />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_populars"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_populars"
@@ -126,7 +136,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_populars" />
 
         <TextView
-            android:id="@+id/tv_see_all_favourite"
+            android:id="@+id/tv_see_all_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="See More"
@@ -150,6 +160,8 @@
             app:layout_constraintHorizontal_bias="0.925"
             app:layout_constraintStart_toEndOf="@+id/tv_populars"
             app:layout_constraintTop_toTopOf="@+id/tv_populars" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
