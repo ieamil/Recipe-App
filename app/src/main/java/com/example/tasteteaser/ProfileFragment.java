@@ -1,21 +1,27 @@
 package com.example.tasteteaser;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.example.tasteteaser.adapter.RecipeAdapter;
 import com.example.tasteteaser.databinding.FragmentProfileBinding;
 import com.example.tasteteaser.models.Recipe;
 import com.example.tasteteaser.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +58,28 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadProfile() {
-
-        User user = new User();
-        user.setName("Denemee");
-        user.setEmail("serdaryildiz2002@gmail.com");
-        binding.tvUserName.setText(user.getName());
-        binding.tvUserEmail.setText(user.getEmail());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if(user != null) {
+                    binding.tvUserName.setText(user.getName());
+                    binding.tvUserEmail.setText(user.getEmail());
+                    Glide.with(requireContext())
+                            .load(user.getImage())
+                            .centerCrop()
+                            .placeholder(R.drawable.img_user)
+                            .into(binding.imageProfile);
+                }else {
+                    Log.e("ProfileFragment", "onDataChange: User is null");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("ProfileFragment", "onCancelled: " + error.getMessage());
+            }
+        });
     }
 
     @Override

@@ -6,35 +6,28 @@
     android:layout_height="match_parent"
     android:background="@drawable/profilebg">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="-500dp"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="101dp"
+        android:layout_height="102dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723"
+        app:srcCompat="@drawable/img_user" />
 
-        <ImageView
-            android:id="@+id/image_profile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
-
-    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/img_profile_edit"
         android:layout_width="40dp"
         android:layout_height="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_email"
         app:srcCompat="@drawable/ic_edit" />
 
     <TextView
@@ -56,12 +49,11 @@
         android:id="@+id/tv_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/rv_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/image_profile" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_profile"
@@ -73,6 +65,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.989" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
