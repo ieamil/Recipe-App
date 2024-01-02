@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.firebase:firebase-bom-32.7.0")
+
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation ("com.google.android.gms:play-services-auth:19.2.0")
@@ -50,8 +52,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //firebase
+
+    implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-auth:22.2.0")
     implementation("com.google.firebase:firebase-analytics-ktx:21.5.0")
+
 
     //circle image view
     implementation ("de.hdodenhof:circleimageview:3.1.0")
