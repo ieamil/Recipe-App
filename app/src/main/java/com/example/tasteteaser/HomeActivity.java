@@ -64,6 +64,9 @@ public class HomeActivity extends AppCompatActivity {
         // NavigationView click listener
 
         // NavigationView içindeki menu öğelerine tıklama olayını dinle
+
+        // NavigationView içindeki menu öğelerine tıklama olayını dinle
+        // NavigationView click listener
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -78,11 +81,29 @@ public class HomeActivity extends AppCompatActivity {
                     // Swap tp LoginActivity if user click "Logout"
                     performLogout();
                     return true;
+                }else if (id == R.id.nav_profile) {
+                    goToProfile();
+                    return true;
                 }
                 return false;
             }
         });
     }
+
+    private void goToProfile() {
+        //ProfileFragment'ı yarat
+        ProfileFragment profileFragment = new ProfileFragment();
+
+        //FragmentTransaction'ı başlat ve fragmentı yerine koy
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, profileFragment)
+                .addToBackStack(null) // Bu, geri tuşuna basıldığında önceki fragmenta geri dönmek için kullanılır
+                .commit();
+
+        // Navigation Drawer'ı kapat
+        drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
 
     // HomeActivity'e geçiş yapacak metot
     private void goToHomeActivity() {

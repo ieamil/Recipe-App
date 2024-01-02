@@ -2,10 +2,7 @@ package com.example.tasteteaser.models;
 //Model class representating a Category
 public class Category {
     //Constructor
-    private String id, name;
-    public Category() {
-
-    }
+    private String id, name , image;
 
     //Getter and setter methods
     public Category(String id, String name){
@@ -27,5 +24,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -12,7 +12,10 @@ import com.example.tasteteaser.adapter.RecipeAdapter;
 import com.example.tasteteaser.databinding.FragmentProfileBinding;
 import com.example.tasteteaser.models.Recipe;
 import com.example.tasteteaser.models.User;
+import com.google.firebase.auth.FirebaseAuth;
 
+
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +52,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadProfile() {
+
         User user = new User();
         user.setName("Denemee");
         user.setEmail("serdaryildiz2002@gmail.com");
