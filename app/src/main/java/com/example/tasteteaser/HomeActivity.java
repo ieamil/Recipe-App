@@ -12,6 +12,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -32,9 +34,15 @@ public class HomeActivity extends AppCompatActivity {
         // DrawerLayout, menuIcon ve NavigationView'u tanımla
         drawerLayout = findViewById(R.id.drawerLayout);
         menuIcon = findViewById(R.id.menuIcon);
-        navigationView = findViewById(R.id.navigationView);
 
-        // menuIcon'a tıklanma olayını dinle
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            navigationView = findViewById(R.id.navigationView);
+        }else{
+            navigationView = findViewById(R.id.nonAccountNavigationView);
+        }
+
+        // menuIcon click listener
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,30 +56,25 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        // NavigationView içindeki menu öğelerine tıklama olayını dinle
+        // NavigationView click listener
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Tıklanan öğenin id'sini kontrol et
+                // Check id
                 int id = item.getItemId();
 
                 if (id == R.id.nav_home) {
-                    // "Home" öğesine tıklanırsa HomeActivity'e geçiş yap
+                    // Swap to HomeActivity if user click "Home"
                     goToHomeActivity();
                     return true;
                 } else if (id == R.id.nav_logout) {
-                    // "Logout" öğesine tıklanırsa çıkış yap ve giriş ekranına dön
+                    // Swap tp LoginActivity if user click "Logout"
                     performLogout();
                     return true;
                 }
-
-                // Diğer öğeler için gerekli işlemleri buraya ekleyebilirsiniz
-
                 return false;
             }
         });
-
-        // Diğer gerekli başlangıç işlemleri...
     }
 
     // HomeActivity'e geçiş yapacak metot
@@ -79,19 +82,16 @@ public class HomeActivity extends AppCompatActivity {
         // HomeActivity'ye geçiş yap
         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
         startActivity(intent);
-        // İsterseniz bu satırı ekleyerek HomeActivity'nin üzerindeki diğer tüm aktiviteleri kapatabilirsiniz
         // finishAffinity();
     }
 
-    // Logout işlemini gerçekleştiren metot
+    // // Logout activity
     private void performLogout() {
-        // Burada logout işlemlerini gerçekleştirin (örneğin, oturumu kapat, verileri temizle vs.)
-
-        // LoginActivity'ye dön
+        // Return LoginActivity
         Intent intent = new Intent(HomeActivity.this, Login.class);
         startActivity(intent);
         finish(); // HomeActivity'yi kapat
     }
 
-    // Diğer metotlar ve işlemler...
+    // Diğer metotlar buraya gelicek
 }
