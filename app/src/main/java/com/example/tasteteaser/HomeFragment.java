@@ -56,8 +56,8 @@ public class HomeFragment extends Fragment {
         binding.rvFoodCategories.setAdapter(new CategoryAdapter());
         foodCategories =new ArrayList<>();
         foodCategories.add(new Category("1" , "Meat" , "bg_img_recipe"));
-        foodCategories.add(new Category("2" , "Aperitif" , "bg_img_recipe"));
-        foodCategories.add(new Category("3" , "Soup" , "bg_img_recipe"));
+        foodCategories.add(new Category("2" , "Breakfast" , "category_for_breakfast"));
+        foodCategories.add(new Category("3" , "Soup" , "category_soup"));
         foodCategories.add(new Category("4" , "For Babies" , "bg_img_recipe"));
         foodCategories.add(new Category("5" , "For Kids" , "bg_img_recipe"));
         CategoryAdapter categoryAdapter = (CategoryAdapter) binding.rvFoodCategories.getAdapter();
