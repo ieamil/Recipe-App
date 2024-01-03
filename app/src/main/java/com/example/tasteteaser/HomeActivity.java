@@ -15,6 +15,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+/*
+* Firebase storage kullanarak recipe fotoğraflarını yükleme işlemlerini yaptırıcan
+ */
 public class HomeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;

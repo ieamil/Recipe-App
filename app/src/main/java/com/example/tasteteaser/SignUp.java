@@ -39,7 +39,7 @@ public class SignUp extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(email, pass)
                             .addOnCompleteListener(this, task -> {
                                 if (task.isSuccessful()) {
-                                    // Kullanıcı başarıyla oluşturuldu, şimdi e-posta doğrulama gönder
+                                    //User created with success , now post authentication mail
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
                                     if (user != null) {
                                         user.sendEmailVerification()
