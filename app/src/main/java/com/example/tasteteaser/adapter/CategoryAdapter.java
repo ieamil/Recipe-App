@@ -58,7 +58,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public void onBind(Category category){
           //  binding.categoryRecipeImage.setImageResource(category.getImage().equalsIgnoreCase("meatr") ? R.drawable.meatrecipe : R.drawable.meatr);
            // binding.categoryRecipeName.setText(category.getName());
-            binding.categoryRecipeImg.setImageResource(category.getImage().equalsIgnoreCase("meatrecipe") ? R.drawable.meatr : R.drawable.meatrecipe);
+            int imageResourceId;
+            try {
+                //if getImage is not null and and R.drawable has this source , get id. Else use default 'meatrecipe' photo and
+                // throw error
+                imageResourceId = R.drawable.class.getField(category.getImage()).getInt(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                imageResourceId = R.drawable.meatrecipe;
+            }
+
+            binding.categoryRecipeImg.setImageResource(imageResourceId);
+            //binding.categoryRecipeName.setText(category.getName());
             binding.categoryRecipeName.setText(category.getName());
         }
     }

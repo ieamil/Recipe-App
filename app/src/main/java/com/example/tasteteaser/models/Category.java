@@ -11,6 +11,12 @@ public class Category {
         this.image = image;
     }
 
+    public Category(String id, String name){
+        this.id =id;
+        this.name =name;
+        this.image = "meatrecipe";
+    }
+
     public String getId() {
         return id;
     }
