@@ -1,7 +1,7 @@
 package com.example.tasteteaser.adapter;
 
-import static com.example.tasteteaser.databinding.ItemRecipeBinding.bind;
-import static com.example.tasteteaser.databinding.ItemRecipeBinding.inflate;
+import static com.example.tasteteaser.databinding.ItemCategoryBinding.bind;
+import static com.example.tasteteaser.databinding.ItemCategoryBinding.inflate;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tasteteaser.R;
 import com.example.tasteteaser.databinding.ItemCategoryBinding;
-import com.example.tasteteaser.databinding.ItemRecipeBinding;
+import com.example.tasteteaser.databinding.ItemCategoryBinding;
 import com.example.tasteteaser.models.Category;
 import com.example.tasteteaser.models.Recipe;
 
@@ -45,8 +45,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public static class CategoryHolder extends RecyclerView.ViewHolder {
 
-        ItemRecipeBinding binding;
-        public CategoryHolder(@NonNull ItemRecipeBinding itemView) {
+        ItemCategoryBinding binding;
+        public CategoryHolder(@NonNull ItemCategoryBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
@@ -56,9 +56,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
   Sets the image resource based on the category's image name and updates the text with the category name.
  */
         public void onBind(Category category){
-            binding.imgDish.setImageResource(category.getImage().equalsIgnoreCase("meatr") ?
-                    R.drawable.meatrecipe : R.drawable.meatr);
-            binding.tvDishName.setText(category.getName());
+          //  binding.categoryRecipeImage.setImageResource(category.getImage().equalsIgnoreCase("meatr") ? R.drawable.meatrecipe : R.drawable.meatr);
+           // binding.categoryRecipeName.setText(category.getName());
+            binding.categoryRecipeImg.setImageResource(category.getImage().equalsIgnoreCase("meatrecipe") ? R.drawable.meatr : R.drawable.meatrecipe);
+            binding.categoryRecipeName.setText(category.getName());
         }
     }
 }

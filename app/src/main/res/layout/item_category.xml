@@ -16,7 +16,7 @@
         android:background="@color/black">
 
         <ImageView
-            android:id="@+id/bg_img_recipe"
+            android:id="@+id/category_recipe_img"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
@@ -27,7 +27,7 @@
             android:src="@drawable/meatrecipe" />
 
         <TextView
-            android:id="@+id/tv_recipe_name"
+            android:id="@+id/category_recipe_name"
             android:layout_width="176dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
