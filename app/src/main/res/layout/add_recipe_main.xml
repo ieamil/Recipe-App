@@ -29,6 +29,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recipe_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Recipe Name" />
@@ -40,10 +41,44 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recipe_ingredients_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingredients" />
         </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Time" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/calories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Calories" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -53,8 +88,11 @@
                 android:id="@+id/recipe_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top"
+                android:minLines="4"
                 android:hint="Instructions" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 
@@ -64,7 +102,8 @@
         android:layout_height="wrap_content"
         android:text="Add Recipe"
         android:layout_margin="10dp"
-        app:cornerRadius="10dp"
+        app:cornerRadius="12dp"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

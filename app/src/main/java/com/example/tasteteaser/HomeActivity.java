@@ -91,6 +91,9 @@ public class HomeActivity extends AppCompatActivity {
                 }else if (id == R.id.nav_profile) {
                     goToProfile();
                     return true;
+                }else if (id == R.id.nav_recipe) {
+                    goToAddRecipe();
+                    return true;
                 }
                 return false;
             }

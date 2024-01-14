@@ -54,8 +54,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
+        <activity
+            android:name=".RecipeActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="sensor"
+            android:theme="@style/Base.Theme.TasteTeaser.BackgroundImageStyle"
+        ></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -10,11 +10,15 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class RecipeActivity extends AppCompatActivity {
 
     RecipeActivity addRecipe;
     Button addRecipeBtn;
-    EditText recipeName , recipeIngredients , recipeInstruction;
+    TextInputLayout recipeName , recipeIngredients , recipeInstruction;
+    TextInputEditText recipeNameInput , recipeIngredientsInput , recipeInstructionInput;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,9 +33,9 @@ public class RecipeActivity extends AppCompatActivity {
         addRecipeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String recipeNameStr = recipeName.getText().toString();
-                String recipeIngredientsStr = recipeIngredients.getText().toString();
-                String recipeInstructionStr = recipeInstruction.getText().toString();
+                String recipeNameStr = recipeName.getEditText().getText().toString();
+                String recipeIngredientsStr = recipeIngredients.getEditText().getText().toString();
+                String recipeInstructionStr = recipeInstruction.getEditText().getText().toString();
 
                 if(!TextUtils.isEmpty(recipeNameStr)){
                     if(!TextUtils.isEmpty(recipeIngredientsStr)){
@@ -49,7 +53,6 @@ public class RecipeActivity extends AppCompatActivity {
             }
         });
     }
-
     private void addRecipe(){
 
     }
