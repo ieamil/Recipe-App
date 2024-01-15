@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.tasteteaser.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 * Firebase storage kullanarak recipe fotoğraflarını yükleme işlemlerini yaptırıcan
  */
 public class HomeActivity extends AppCompatActivity {
-
+    ActivityHomeBinding binding;
     private DrawerLayout drawerLayout;
     private ImageView menuIcon;
     private NavigationView navigationView;
@@ -98,6 +100,9 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
     }
 
     private void goToProfile() {
@@ -132,9 +137,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void goToAddRecipe() {
-        Intent intent = new Intent(HomeActivity.this , RecipeActivity.class);
+        binding.floatingActionButton.setOnClickListener(view -> {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null)
+                Toast.makeText(this, "Please login to add recipe", Toast.LENGTH_SHORT).show();
+            else
+                startActivity(new Intent(HomeActivity.this, RecipeActivity.class));
+        });
+
+       /* Intent intent = new Intent(HomeActivity.this , RecipeActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 
     // Diğer metotlar buraya gelicek
