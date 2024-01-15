@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tasteteaser.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 * Firebase storage kullanarak recipe fotoğraflarını yükleme işlemlerini yaptırıcan
  */
 public class HomeActivity extends AppCompatActivity {
-
+    ActivityHomeBinding binding;
     private DrawerLayout drawerLayout;
     private ImageView menuIcon;
     private NavigationView navigationView;
@@ -98,12 +104,14 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
     }
 
     private void goToProfile() {
         //ProfileFragment'ı yarat
         ProfileFragment profileFragment = new ProfileFragment();
-
         //FragmentTransaction'ı başlat ve fragmentı yerine koy
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, profileFragment)
@@ -132,9 +140,28 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void goToAddRecipe() {
+        /*RecipeFragment recipeFragment = new RecipeFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment lastFragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        if(lastFragment != null){
+            fragmentTransaction.detach(lastFragment);
+        }else{
+            return;
+        }
+        fragmentTransaction.replace(R.id.fragment_container , recipeFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();*/
+        /*getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, recipeFragment)
+                .addToBackStack(null) // Bu, geri tuşuna basıldığında önceki fragmenta geri dönmek için kullanılır
+                .commit();*/
+
+        // Close Drawer
         Intent intent = new Intent(HomeActivity.this , RecipeActivity.class);
         startActivity(intent);
         finish();
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     // Diğer metotlar buraya gelicek
