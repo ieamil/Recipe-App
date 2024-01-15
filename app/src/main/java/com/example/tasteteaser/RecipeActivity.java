@@ -10,6 +10,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -78,7 +80,9 @@ public class RecipeActivity extends AppCompatActivity {
                         if(!TextUtils.isEmpty(recipeInstructionStr)){
                             if(!TextUtils.isEmpty(caloriesStr) && !TextUtils.isEmpty(timeStr)){
                                 addRecipe();
-                                Toast.makeText(RecipeActivity.this , "Recipe Added" , Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RecipeActivity.this , HomeActivity.class);
+                                startActivity(intent);
+                                finish();
                             }else{
                                 Toast.makeText(RecipeActivity.this , "Calories & Time can not be empty" , Toast.LENGTH_SHORT).show();
                             }
@@ -111,40 +115,67 @@ public class RecipeActivity extends AppCompatActivity {
             }
         });
     }
-    private void addRecipe(){
-        String userId = FirebaseAuth.getInstance().getUid();
-        String recipeNameStr = recipeName.getEditText().getText().toString();
-        String recipeIngredientsStr = recipeIngredients.getEditText().getText().toString();
-        String recipeInstructionStr = recipeInstruction.getEditText().getText().toString();
-        String caloriesStr = calories.getEditText().getText().toString();
-        String timeStr = time.getEditText().getText().toString();
-        String image;
-        if(imageSelected){
-            image = null;
-        }else{
-            int pictureId = R.drawable.meatr;
-            Drawable drawable = getResources().getDrawable(pictureId);
-            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            byte[] byteArray = baos.toByteArray();
-            String base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT);
-            image = base64Image;
-        }
-        Recipe newRecipe = new Recipe(
-                userId,
-                recipeNameStr,
-                image,
-                "description",
-                "Soup",
-                recipeInstructionStr,
-                recipeIngredientsStr,
-                caloriesStr,
-                timeStr
-        );
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference reference = database.getReference("Recipes").push();
-    reference.setValue(newRecipe);
+    private void addRecipe() {
+        // Arka planda çalışacak bir Thread oluştur
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // UI işlemlerini güncellemek için Handler kullan
+                Handler handler = new Handler(Looper.getMainLooper());
+
+                // Arka plan işlemlerini burada yap
+                String userId = FirebaseAuth.getInstance().getUid();
+                String recipeNameStr = recipeName.getEditText().getText().toString();
+                String recipeIngredientsStr = recipeIngredients.getEditText().getText().toString();
+                String recipeInstructionStr = recipeInstruction.getEditText().getText().toString();
+                String caloriesStr = calories.getEditText().getText().toString();
+                String timeStr = time.getEditText().getText().toString();
+                String image;
+
+                if (imageSelected) {
+                    image = null;
+                } else {
+                    int pictureId = R.drawable.meatr;
+                    Drawable drawable = getResources().getDrawable(pictureId);
+                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    byte[] byteArray = baos.toByteArray();
+                    String base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    image = base64Image;
+                }
+
+                Recipe newRecipe = new Recipe(
+                        userId,
+                        recipeNameStr,
+                        image,
+                        "description",
+                        "Soup",
+                        recipeInstructionStr,
+                        recipeIngredientsStr,
+                        caloriesStr,
+                        timeStr
+                );
+
+                // Firebase'e ekleme işlemi
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference("Recipes").push();
+                reference.setValue(newRecipe);
+
+                // UI'yi güncelle (örneğin loading modal'ı kapat)
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // UI işlemleri burada yapılır
+                        // Örneğin loading modal'ı kapat
+                        Toast.makeText(RecipeActivity.this, "Recipe Added Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        // Thread'i başlat
+        thread.start();
     }
 
 

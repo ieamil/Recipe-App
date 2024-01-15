@@ -161,10 +161,12 @@
 
         <Button
             android:id="@+id/add_recipe_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:text="+"
-            app:cornerRadius="10dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/black"
+            app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
