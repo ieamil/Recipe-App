@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 
@@ -44,8 +45,19 @@ public class ProfileFragment extends Fragment {
     }
 
     public void init(){
-        PickImageDialog.build(new PickSetup()).show(getActivity());
+        binding.imgProfileEdit.setOnClickListener(v -> {
+            PickImageDialog.build(new PickSetup()).show(getActivity());
+        });
+    }
 
+    public void onPickResult(PickResult r) {
+        if (r.getError() == null){
+            Log.e("ProfileFragment","onPickResult: " + r.getUri());
+            binding.imageProfile.setImageURI(r.getUri());
+
+        }else{
+            Log.e("ProfileFragment","onPickResult: " + r.getError().getMessage());
+        }
     }
 
     private void loadUserRecipes() {
