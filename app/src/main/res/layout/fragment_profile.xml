@@ -17,17 +17,16 @@
         app:layout_constraintVertical_bias="0.723"
         app:srcCompat="@drawable/img_user" />
 
-
     <ImageView
         android:id="@+id/img_profile_edit"
         android:layout_width="40dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/rv_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+        app:layout_constraintVertical_bias="0.35"
         app:srcCompat="@drawable/ic_edit" />
 
     <TextView
@@ -65,8 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.989" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
