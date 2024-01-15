@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,25 +32,31 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class RecipeActivity extends AppCompatActivity {
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     ProgressDialog dialog;
 
 
-    Button addRecipeBtn;
+    Button addRecipeBtn , addPhotoBtn;
+    ImageView backBtn;
     TextInputLayout recipeName , recipeIngredients , recipeInstruction , calories , time;
     private boolean imageSelected = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_recipe_fragment);
+        setContentView(R.layout.add_recipe_main);
 
         addRecipeBtn = findViewById(R.id.add_recipe_btn);
+        backBtn = findViewById(R.id.backBtn);
+        addPhotoBtn = findViewById(R.id.add_recipe_image_btn);
         recipeName = findViewById(R.id.recipe_name);
         recipeIngredients = findViewById(R.id.recipe_ingredients);
         recipeInstruction = findViewById(R.id.recipe_instructions);
@@ -84,6 +91,23 @@ public class RecipeActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(RecipeActivity.this , "Recipe Name is empty" , Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        addPhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Add Image "  , "calisti");
+
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecipeActivity.this , HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -122,6 +146,7 @@ public class RecipeActivity extends AppCompatActivity {
     DatabaseReference reference = database.getReference("Recipes").push();
     reference.setValue(newRecipe);
     }
+
 
     private void uploadImage(){
         FirebaseStorage storage = FirebaseStorage.getInstance();
