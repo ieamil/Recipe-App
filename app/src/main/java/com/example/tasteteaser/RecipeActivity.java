@@ -7,9 +7,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import com.example.tasteteaser.databinding.ActivityHomeBinding;
 import com.example.tasteteaser.models.Recipe;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,7 +39,7 @@ public class RecipeActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     ProgressDialog dialog;
 
-    RecipeActivity addRecipe;
+
     Button addRecipeBtn;
     TextInputLayout recipeName , recipeIngredients , recipeInstruction , calories , time;
     private boolean imageSelected = false;
@@ -68,6 +71,7 @@ public class RecipeActivity extends AppCompatActivity {
                         if(!TextUtils.isEmpty(recipeInstructionStr)){
                             if(!TextUtils.isEmpty(caloriesStr) && !TextUtils.isEmpty(timeStr)){
                                 addRecipe();
+                                Toast.makeText(RecipeActivity.this , "Recipe Added" , Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(RecipeActivity.this , "Calories & Time can not be empty" , Toast.LENGTH_SHORT).show();
                             }
@@ -84,7 +88,45 @@ public class RecipeActivity extends AppCompatActivity {
         });
     }
     private void addRecipe(){
-        Intent intent = new Intent(RecipeActivity.this , ProfileFragment.class);
+        String userId = FirebaseAuth.getInstance().getUid();
+        String recipeNameStr = recipeName.getEditText().getText().toString();
+        String recipeIngredientsStr = recipeIngredients.getEditText().getText().toString();
+        String recipeInstructionStr = recipeInstruction.getEditText().getText().toString();
+        String caloriesStr = calories.getEditText().getText().toString();
+        String timeStr = time.getEditText().getText().toString();
+        String image;
+        if(imageSelected){
+            image = null;
+        }else{
+            int pictureId = R.drawable.meatr;
+            Drawable drawable = getResources().getDrawable(pictureId);
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] byteArray = baos.toByteArray();
+            String base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            image = base64Image;
+        }
+        Recipe newRecipe = new Recipe(
+                userId,
+                recipeNameStr,
+                image,
+                "description",
+                "Soup",
+                recipeInstructionStr,
+                recipeIngredientsStr,
+                caloriesStr,
+                timeStr
+        );
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference reference = database.getReference("Recipes").push();
+    reference.setValue(newRecipe);
+    }
+
+    private void uploadImage(){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference imagesReference = storageRef.child("recipePhotos");
     }
 
     private void saveDataInDataBase(Recipe recipe, String url) {

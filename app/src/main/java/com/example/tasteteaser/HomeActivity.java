@@ -140,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void goToAddRecipe() {
-        RecipeFragment recipeFragment = new RecipeFragment();
+        /*RecipeFragment recipeFragment = new RecipeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment lastFragment = fragmentManager.findFragmentById(R.id.fragment_container);
@@ -151,13 +151,16 @@ public class HomeActivity extends AppCompatActivity {
         }
         fragmentTransaction.replace(R.id.fragment_container , recipeFragment);
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
         /*getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, recipeFragment)
                 .addToBackStack(null) // Bu, geri tuşuna basıldığında önceki fragmenta geri dönmek için kullanılır
                 .commit();*/
 
         // Close Drawer
+        Intent intent = new Intent(HomeActivity.this , RecipeActivity.class);
+        startActivity(intent);
+        finish();
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 

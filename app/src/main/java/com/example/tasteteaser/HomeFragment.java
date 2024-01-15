@@ -40,11 +40,11 @@ public class HomeFragment extends Fragment {
         binding.rvPopulars.setAdapter(new RecipeAdapter()); //Category Adapter yapacağız burayı
         popularRecipes = new ArrayList<>() ;
         popularRecipes.add(new Recipe("1","Popular One","meatrecipe","null","Popular",
-                "null","","","",""));
+                "null","","",""));
         popularRecipes.add(new Recipe("2","Popular 2","meatrecipe","null","Popular",
-                "null","","","",""));
+                "null","","",""));
         popularRecipes.add(new Recipe("3","Popular 3","meatr","null","Popular",
-                "null","","","",""));
+                "null","","",""));
         RecipeAdapter adapter =(RecipeAdapter) binding.rvPopulars.getAdapter();
         if (adapter != null){
             adapter.setRecipeList(popularRecipes);
