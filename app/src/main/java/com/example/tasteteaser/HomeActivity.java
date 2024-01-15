@@ -91,6 +91,9 @@ public class HomeActivity extends AppCompatActivity {
                 }else if (id == R.id.nav_profile) {
                     goToProfile();
                     return true;
+                }else if (id == R.id.nav_recipe) {
+                    goToAddRecipe();
+                    return true;
                 }
                 return false;
             }
@@ -125,7 +128,13 @@ public class HomeActivity extends AppCompatActivity {
         // Return LoginActivity
         Intent intent = new Intent(HomeActivity.this, Login.class);
         startActivity(intent);
-        finish(); // HomeActivity'yi kapat
+        finish(); // Close HomeActivity
+    }
+
+    private void goToAddRecipe() {
+        Intent intent = new Intent(HomeActivity.this , RecipeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     // Diğer metotlar buraya gelicek

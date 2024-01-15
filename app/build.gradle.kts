@@ -61,4 +61,7 @@ dependencies {
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.15.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0") //hata çıkarsa 4.11 yap geri
+
+    //Image picker
+    implementation ("com.github.jrvansuita:PickImage:+")
 }
