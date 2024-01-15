@@ -6,7 +6,7 @@ public class Recipe {
     protected String id, name, image, description, category, instructions, ingredients, calories, time, servings;
 
     //Constructor
-    public Recipe(String id, String name, String image, String description, String category, String instructions, String ingredients, String calories, String time, String servings) {
+    public Recipe(String id, String name, String image, String description, String category, String instructions, String ingredients, String calories, String time) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -16,7 +16,6 @@ public class Recipe {
         this.ingredients = ingredients;
         this.calories = calories;
         this.time = time;
-        this.servings = servings;
     }
 
     //Getter and setter methods
@@ -92,11 +91,4 @@ public class Recipe {
         this.time = time;
     }
 
-    public String getServings() {
-        return servings;
-    }
-
-    public void setServings(String servings) {
-        this.servings = servings;
-    }
 }

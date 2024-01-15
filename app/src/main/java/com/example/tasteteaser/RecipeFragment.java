@@ -18,7 +18,7 @@ public class RecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = AddRecipeFragmentBinding.inflate(inflater , container , false);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return binding.getRoot();
     }
 
     @Override

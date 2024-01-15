@@ -45,11 +45,11 @@ public class ProfileFragment extends Fragment {
         binding.rvProfile.setAdapter(new RecipeAdapter());
         List<Recipe> recipes = new ArrayList<>();
         recipes.add(new Recipe("1","One","meatrecipe","null","Popular",
-                "null","","","",""));
+                "null","","",""));
         recipes.add(new Recipe("2","2","meatrecipe","null","Popular",
-                "null","","","",""));
+                "null","","",""));
         recipes.add(new Recipe("3","3","meatr","null","Popular",
-                "null","","","",""));
+                "null","","",""));
         RecipeAdapter adapter =(RecipeAdapter) binding.rvProfile.getAdapter();
         if (adapter != null){
             adapter.setRecipeList(recipes);

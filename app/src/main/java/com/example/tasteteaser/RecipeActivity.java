@@ -33,7 +33,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class RecipeActivity extends AppCompatActivity {
-    ActivityHomeBinding
     FirebaseStorage storage = FirebaseStorage.getInstance();
     ProgressDialog dialog;
 
@@ -45,7 +44,7 @@ public class RecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_recipe_main);
+        setContentView(R.layout.add_recipe_fragment);
 
         addRecipeBtn = findViewById(R.id.add_recipe_btn);
         recipeName = findViewById(R.id.recipe_name);
@@ -86,46 +85,6 @@ public class RecipeActivity extends AppCompatActivity {
     }
     private void addRecipe(){
         Intent intent = new Intent(RecipeActivity.this , ProfileFragment.class);
-    }
-
-    private void uploadImage(Recipe recipe) {
-        new Thread(() -> {
-            final String[] url = {""};
-            // We will upload the image to the firebase storage.
-            binding.imgRecipe.setDrawingCacheEnabled(true);
-            Bitmap bitmap = ((BitmapDrawable) binding.imgRecipe.getDrawable()).getBitmap();
-            binding.imgRecipe.setDrawingCacheEnabled(false);
-            String id = recipe.getId();
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference().child("recipePhotos/" + id + "_recipe.jpg");
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] data = baos.toByteArray();
-            UploadTask uploadTask = storageRef.putBytes(data);
-            uploadTask.continueWithTask(task -> {
-                if (!task.isSuccessful()) {
-                    throw Objects.requireNonNull(task.getException());
-                }
-                return storageRef.getDownloadUrl();
-            }).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    // We need to save this download url in firebase database
-                    // So that we can load it in our app
-                    url[0] = downloadUri.toString();
-                    runOnUiThread(() -> {
-                        Toast.makeText(RecipeActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                        saveDataInDataBase(recipe, url[0]);
-                    });
-                } else {
-                    runOnUiThread(() -> {
-                        Toast.makeText(RecipeActivity.this, "Error in uploading image", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        Log.e("ProfileFragment", "onComplete: " + Objects.requireNonNull(task.getException()).getMessage());
-                    });
-                }
-            });
-        }).start();
     }
 
     private void saveDataInDataBase(Recipe recipe, String url) {
