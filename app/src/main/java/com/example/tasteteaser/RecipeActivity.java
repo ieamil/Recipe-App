@@ -16,14 +16,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< HEAD
+=======
+import com.example.tasteteaser.databinding.ActivityHomeBinding;
+import com.example.tasteteaser.models.Category;
+>>>>>>> 36a7ca0c058cd6f5b1ccec112a065ab38c36c9ba
 import com.example.tasteteaser.models.Recipe;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -105,7 +114,6 @@ public class RecipeActivity extends AppCompatActivity {
         });
     }
     private void addRecipe() {
-        // Arka planda çalışacak bir Thread oluştur
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -133,7 +141,6 @@ public class RecipeActivity extends AppCompatActivity {
                     String base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT);
                     image = base64Image;
                 }
-
                 Recipe newRecipe = new Recipe(
                         userId,
                         recipeNameStr,
@@ -145,12 +152,11 @@ public class RecipeActivity extends AppCompatActivity {
                         caloriesStr,
                         timeStr
                 );
-
                 // Firebase'e ekleme işlemi
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference reference = database.getReference("Recipes").push();
                 reference.setValue(newRecipe);
-
+                addRecipeToCategory(newRecipe.getCategory() , newRecipe);
                 // UI'yi güncelle (örneğin loading modal'ı kapat)
                 handler.post(new Runnable() {
                     @Override
@@ -165,6 +171,14 @@ public class RecipeActivity extends AppCompatActivity {
 
         // Thread'i başlat
         thread.start();
+
+    }
+
+    private void addRecipeToCategory(String category , Recipe recipe){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Category").child(category);
+        DatabaseReference newChildRef = reference.push();
+        newChildRef.child(category).setValue(recipe);
     }
 
 
