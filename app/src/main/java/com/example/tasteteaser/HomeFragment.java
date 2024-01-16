@@ -98,18 +98,14 @@ public class HomeFragment extends Fragment {
         ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Categories are loading...");
         progressDialog.show();
-
         getCategories(new FunctionLoadedListener() {
             @Override
             public void onCategoriesLoaded(List<Category> loadedCategories) {
                 progressDialog.dismiss();
-
-                // Elde edilen yeni liste ile istediğiniz işlemleri yapabilirsiniz
                 CategoryAdapter categoryAdapter = (CategoryAdapter) binding.rvFoodCategories.getAdapter();
                 categoryAdapter.setCategoryList(loadedCategories);
                 categoryAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onRecipesLoaded(List<Recipe> recipes) {
                 return;
@@ -127,22 +123,25 @@ public class HomeFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference categoriesData = database.getReference("Category");
 
-        categoriesData.addValueEventListener(new ValueEventListener() {
+        categoriesData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                List<Category> loadedCategories = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Category category = dataSnapshot.getValue(Category.class);
+                    loadedCategories.add(category);
                     foodCategories.add(category);
-                    Log.d("foodcat eklendi : " , "eklenen : " + category.getName());
+                    Log.d("foodcat eklendi : ", "eklenen : " + category.getName());
                 }
-                Log.d("foodcat" , "1 : " + foodCategories.get(1).getName());
-                listener.onCategoriesLoaded(foodCategories);
+                Log.d("foodcat", "1 : " + loadedCategories.get(1).getName());
+
+                // onDataChange içinde onCategoriesLoaded metodunu çağır
+                listener.onCategoriesLoaded(loadedCategories);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Get Categories Error " ,error.getMessage());
+                Log.e("Get Categories Error ", error.getMessage());
             }
         });
     }

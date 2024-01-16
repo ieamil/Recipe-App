@@ -21,6 +21,10 @@ public class Recipe implements Serializable {
         this.time = time;
     }
 
+    public Recipe(){
+
+    }
+
     //Getter and setter methods
     public String getId() {
         return id;

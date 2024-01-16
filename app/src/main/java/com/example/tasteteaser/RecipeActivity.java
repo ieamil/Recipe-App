@@ -19,6 +19,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< HEAD
+=======
+import com.example.tasteteaser.databinding.ActivityHomeBinding;
+import com.example.tasteteaser.models.Category;
+
+>>>>>>> adfaf95d1dce44d3fcdd0ff3a4eada161a3c29a1
 import com.example.tasteteaser.models.Recipe;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,9 +75,6 @@ public class RecipeActivity extends AppCompatActivity {
                         if(!TextUtils.isEmpty(recipeInstructionStr)){
                             if(!TextUtils.isEmpty(caloriesStr) && !TextUtils.isEmpty(timeStr)){
                                 addRecipe();
-                                Intent intent = new Intent(RecipeActivity.this , HomeActivity.class);
-                                startActivity(intent);
-                                finish();
                             }else{
                                 Toast.makeText(RecipeActivity.this , "Calories & Time can not be empty" , Toast.LENGTH_SHORT).show();
                             }
@@ -119,7 +122,6 @@ public class RecipeActivity extends AppCompatActivity {
                 String caloriesStr = calories.getEditText().getText().toString();
                 String timeStr = time.getEditText().getText().toString();
                 String image;
-
                 if (imageSelected) {
                     image = null;
                 } else {

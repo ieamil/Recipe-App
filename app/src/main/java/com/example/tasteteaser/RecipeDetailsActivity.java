@@ -113,9 +113,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     //    }
     //}
 
-    private void updateDataWithFireBase(String id) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
-        reference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void updateDataWithFireBase(String recipeId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child("recipeId");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Recipe recipe = snapshot.getValue(Recipe.class);
