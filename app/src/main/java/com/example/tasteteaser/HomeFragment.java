@@ -1,10 +1,12 @@
 package com.example.tasteteaser;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,15 +64,26 @@ public class HomeFragment extends Fragment {
 
     private void loadFoodCategories() {
         binding.rvFoodCategories.setAdapter(new CategoryAdapter());
-        getCategories();
-        /*foodCategories.add(new Category("1" , "Meat" , "bg_img_recipe"));
-        foodCategories.add(new Category("2" , "Breakfast" , "category_for_breakfast"));
-        foodCategories.add(new Category("3" , "Soup" , "category_soup"));
-        foodCategories.add(new Category("4" , "For Babies" , "bg_img_recipe"));
-        foodCategories.add(new Category("5" , "For Kids" , "bg_img_recipe"));*/
-        CategoryAdapter categoryAdapter = (CategoryAdapter) binding.rvFoodCategories.getAdapter();
-        categoryAdapter.setCategoryList(foodCategories);
-        categoryAdapter.notifyDataSetChanged();
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Categories are loading...");
+        progressDialog.show();
+
+        getCategories(new FunctionLoadedListener() {
+            @Override
+            public void onCategoriesLoaded(List<Category> loadedCategories) {
+                progressDialog.dismiss();
+
+                // Elde edilen yeni liste ile istediğiniz işlemleri yapabilirsiniz
+                CategoryAdapter categoryAdapter = (CategoryAdapter) binding.rvFoodCategories.getAdapter();
+                categoryAdapter.setCategoryList(loadedCategories);
+                categoryAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onRecipesLoaded(List<Recipe> recipes) {
+                return;
+            }
+        });
     }
 
     @Override
@@ -79,9 +92,10 @@ public class HomeFragment extends Fragment {
         binding = null ;
     }
 
-    private void getCategories(){
+    private void getCategories(FunctionLoadedListener listener) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference categoriesData = database.getReference("Category");
+
         categoriesData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -92,38 +106,41 @@ public class HomeFragment extends Fragment {
                     Log.d("foodcat eklendi : " , "eklenen : " + category.getName());
                 }
                 Log.d("foodcat" , "1 : " + foodCategories.get(1).getName());
+                listener.onCategoriesLoaded(foodCategories);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Get Categories Error " ,error.getMessage());
-                return;
             }
         });
     }
 
-    private List<Recipe> getRecipesOfCategory(String category){
+
+
+    private List<Recipe> getRecipesOfCategory(String category , FunctionLoadedListener listener){
         List<Recipe> recipesOfCategory = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference categoriesData = database.getReference("Category");
-        categoriesData.addValueEventListener(new ValueEventListener() {
+        DatabaseReference reference = database.getReference("Category").child(category);
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(dataSnapshot.getKey() == category){
-                        for(DataSnapshot recipes : dataSnapshot.getChildren()){
-                            Recipe recipe = recipes.getValue(Recipe.class);
-                            recipesOfCategory.add(recipe);
-                        }
-                        break;
-                    }
+                    Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    recipesOfCategory.add(recipe);
                 }
+                listener.onRecipesLoaded(recipesOfCategory);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Get Recipes Of Category Error " , error.getMessage());
+                Log.e("get recipes of category error " , error.getMessage());
             }
         });
         return recipesOfCategory;
     }
+}
+
+interface FunctionLoadedListener{
+    void onCategoriesLoaded(List<Category> categories);
+    void onRecipesLoaded(List<Recipe> recipes);
 }
