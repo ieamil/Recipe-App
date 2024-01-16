@@ -11,10 +11,14 @@ public class Category {
         this.image = image;
     }
 
+    public Category(){
+
+    }
+
     public Category(String id, String name){
         this.id =id;
         this.name =name;
-        this.image = "meatrecipe";
+        this.image = image; //önceden meatrecipe koymuştuk
     }
 
     public String getId() {
@@ -39,5 +43,9 @@ public class Category {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String toString(){
+        return this.id + " : " + this.name;
     }
 }

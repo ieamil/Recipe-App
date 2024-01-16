@@ -110,20 +110,26 @@ public class ProfileFragment extends Fragment {
 
 
     private void loadUserRecipes() {
-        binding.rvProfile.setLayoutManager(new GridLayoutManager(getContext(),2));
+        binding.rvProfile.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.rvProfile.setAdapter(new RecipeAdapter());
-        List<Recipe> recipes = new ArrayList<>();
-        recipes.add(new Recipe("1","One","meatrecipe","null","Popular",
-                "null","","",""));
-        recipes.add(new Recipe("2","2","meatrecipe","null","Popular",
-                "null","","",""));
-        recipes.add(new Recipe("3","3","meatr","null","Popular",
-                "null","","",""));
-        RecipeAdapter adapter =(RecipeAdapter) binding.rvProfile.getAdapter();
-        if (adapter != null){
-            adapter.setRecipeList(recipes);
-            adapter.notifyDataSetChanged();
-        }
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Recipes").orderByChild("id").equalTo(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Recipe> recipes = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    recipes.add(recipe);
+                }
+                ((RecipeAdapter) Objects.requireNonNull(binding.rvProfile.getAdapter())).setRecipeList(recipes);
+                // Let's test it
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("ProfileFragment", "onCancelled: " + error.getMessage());
+            }
+        });
     }
 
     private void loadProfile() {
