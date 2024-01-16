@@ -5,7 +5,8 @@ import java.io.Serializable;
 // Model class representing a recipe
 public class Recipe implements Serializable {
     //Properties
-    protected String id, name, image, description, category, instructions, ingredients, calories, time;
+    private String id, name, image, description, category, instructions, ingredients, calories, time;
+    public Recipe() {}
 
     //Constructor
     public Recipe(String id, String name, String image, String description, String category, String instructions, String ingredients, String calories, String time) {
