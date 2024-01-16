@@ -159,11 +159,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <Button
             android:id="@+id/add_recipe_button"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:text="+"
+            android:textSize="25dp"
             android:layout_margin="10dp"
             android:backgroundTint="@color/black"
             app:cornerRadius="12dp"

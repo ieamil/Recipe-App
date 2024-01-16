@@ -4,55 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@drawable/addrecipebg">
 
     <LinearLayout
+        android:id="@+id/up_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/up_bar"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_back" />
+            android:baselineAligned="false"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_backhome" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="Share Your Magic!"
-            android:textAlignment="center"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="36dp"
+            android:fontFamily="@font/average_sans"
+            android:text="Share Your Magic!"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:gravity="right"
+            android:textStyle="italic"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="15dp"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/recipe_image_const"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:id="@+id/recipe_image_const"
-        app:layout_constraintTop_toBottomOf="@id/up_bar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/inputs"
-        app:layout_constraintEnd_toStartOf="@id/add_recipe_image_btn">
+        app:layout_constraintEnd_toStartOf="@id/add_recipe_image_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/up_bar">
 
         <ImageView
             android:id="@+id/recipe_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/meatr"
             android:padding="10dp"
-            android:scaleType="fitCenter" />
-
+            android:scaleType="fitCenter"
+            android:src="@drawable/meatr" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -61,20 +66,22 @@
         android:id="@+id/add_recipe_image_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="112dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="Add Image"
+        android:textColor="@color/black"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="@id/recipe_image_const"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="#505050"
-        android:text="Add Image" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:id="@+id/inputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/add_recipe_btn">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -165,8 +172,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:minLines="4"
-                android:hint="Instructions" />
+                android:hint="Instructions"
+                android:minLines="4" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -176,10 +183,10 @@
         android:id="@+id/add_recipe_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Recipe"
         android:layout_margin="10dp"
-        app:cornerRadius="12dp"
         android:backgroundTint="@color/black"
+        android:text="Add Recipe"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
