@@ -2,13 +2,16 @@ package com.example.tasteteaser.adapter;
 
 import static com.example.tasteteaser.databinding.ItemCategoryBinding.inflate;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tasteteaser.AllRecipesActivity;
 import com.example.tasteteaser.R;
 import com.example.tasteteaser.databinding.ItemCategoryBinding;
 import com.example.tasteteaser.models.Category;
@@ -60,6 +63,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     .centerCrop()
                     .placeholder(R.drawable.meatrecipe)
                     .into(binding.categoryRecipeImg);
+
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(binding.getRoot().getContext(), AllRecipesActivity.class);
+                    intent.putExtra("type", "category");
+                    intent.putExtra("category", category.getName());
+                    binding.getRoot().getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
