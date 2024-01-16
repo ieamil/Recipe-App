@@ -185,22 +185,4 @@ public class RecipeActivity extends AppCompatActivity {
         StorageReference imagesReference = storageRef.child("recipePhotos");
     }
 
-    private void saveDataInDataBase(Recipe recipe, String url) {
-        recipe.setImage(url);
-        // 6. We will save the recipe object in the firebase database.
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Recipes");
-        String id = reference.push().getKey();
-        recipe.setId(id);
-        if (id != null) {
-            reference.child(id).setValue(recipe).addOnCompleteListener(task -> {
-                dialog.dismiss();
-                if (task.isSuccessful()) {
-                    Toast.makeText(RecipeActivity.this, "Recipe Added Successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(RecipeActivity.this, "Error in adding recipe", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
 }
