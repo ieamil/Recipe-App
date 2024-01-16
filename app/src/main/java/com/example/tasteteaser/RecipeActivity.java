@@ -135,7 +135,6 @@ public class RecipeActivity extends AppCompatActivity {
                 String caloriesStr = calories.getEditText().getText().toString();
                 String timeStr = time.getEditText().getText().toString();
                 String image;
-
                 if (imageSelected) {
                     image = null;
                 } else {
