@@ -20,11 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
-=======
 import com.example.tasteteaser.databinding.ActivityHomeBinding;
 import com.example.tasteteaser.models.Category;
->>>>>>> 36a7ca0c058cd6f5b1ccec112a065ab38c36c9ba
+
 import com.example.tasteteaser.models.Recipe;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,9 +76,6 @@ public class RecipeActivity extends AppCompatActivity {
                         if(!TextUtils.isEmpty(recipeInstructionStr)){
                             if(!TextUtils.isEmpty(caloriesStr) && !TextUtils.isEmpty(timeStr)){
                                 addRecipe();
-                                Intent intent = new Intent(RecipeActivity.this , HomeActivity.class);
-                                startActivity(intent);
-                                finish();
                             }else{
                                 Toast.makeText(RecipeActivity.this , "Calories & Time can not be empty" , Toast.LENGTH_SHORT).show();
                             }

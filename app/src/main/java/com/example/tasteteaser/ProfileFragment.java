@@ -112,17 +112,21 @@ public class ProfileFragment extends Fragment {
     private void loadUserRecipes() {
         binding.rvProfile.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.rvProfile.setAdapter(new RecipeAdapter());
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("Recipes").orderByChild("id").equalTo(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Recipe> recipes = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    //Recipe recipe = new Recipe("" , "" , "" , "" , "" , "" , "" , "" , "");
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                    recipes.add(recipe);
+                    //Log.d("Recipeee" , "asdasd   " + dataSnapshot.getValue(Recipe.class));
+                    if(recipe.getId().equals(FirebaseAuth.getInstance().getUid())){
+                        recipes.add(recipe);
+                    }
                 }
                 ((RecipeAdapter) Objects.requireNonNull(binding.rvProfile.getAdapter())).setRecipeList(recipes);
-                // Let's test it
             }
 
             @Override
