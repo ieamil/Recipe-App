@@ -1,0 +1,22 @@
+<resources>
+    <string-array name="category_array">
+        <item>Beverage Recipes</item>
+        <item>Breakfast Recipes</item>
+        <item>Cake Recipes</item>
+        <item>Dessert Recipes</item>
+        <item>Diet Meals</item>
+        <item>Egg Dishes</item>
+        <item>For Babies</item>
+        <item>For Children</item>
+        <item>Legume Dishes</item>
+        <item>Meat Dishes</item>
+        <item>Pastry Recipes</item>
+        <item>Pasta Recipes</item>
+        <item>Quick Meals</item>
+        <item>Salad</item>
+        <item>Sandwich Recipes</item>
+        <item>Soup Recipes</item>
+        <item>Vegan Dishes</item>
+        <item>Vegetable Dishes</item>
+    </string-array>
+</resources>

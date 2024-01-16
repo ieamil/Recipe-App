@@ -76,10 +76,6 @@ public class NavMainActivity extends AppCompatActivity {
                         Toast.makeText(NavMainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawer(GravityCompat.START);}
 
-                    else if (item.getItemId() == R.id.nav_recipe) {
-                        Toast.makeText(NavMainActivity.this, "Add Recipe", Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawer(GravityCompat.START);}
-
                     else if (item.getItemId() == R.id.nav_recorded) {
                         Toast.makeText(NavMainActivity.this, "Recorded", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawer(GravityCompat.START);}
