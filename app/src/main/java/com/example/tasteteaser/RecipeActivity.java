@@ -19,12 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
-=======
-import com.example.tasteteaser.databinding.ActivityHomeBinding;
-import com.example.tasteteaser.models.Category;
-
->>>>>>> adfaf95d1dce44d3fcdd0ff3a4eada161a3c29a1
 import com.example.tasteteaser.models.Recipe;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;

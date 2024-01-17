@@ -6,7 +6,6 @@ import java.io.Serializable;
 public class Recipe implements Serializable {
     //Properties
     private String id, name, image, description, category, instructions, ingredients, calories, time;
-    public Recipe() {}
 
     //Constructor
     public Recipe(String id, String name, String image, String description, String category, String instructions, String ingredients, String calories, String time) {
@@ -21,9 +20,7 @@ public class Recipe implements Serializable {
         this.time = time;
     }
 
-    public Recipe(){
-
-    }
+    public Recipe(){}
 
     //Getter and setter methods
     public String getId() {
