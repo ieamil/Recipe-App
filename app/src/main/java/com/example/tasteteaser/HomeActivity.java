@@ -62,7 +62,6 @@ public class HomeActivity extends AppCompatActivity {
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Drawer'ı aç/kapat
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
@@ -84,14 +83,12 @@ public class HomeActivity extends AppCompatActivity {
         tvSeeAllCategories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Kullanıcı "See All"e tıkladığında ActivityAllCategories'e geçiş yap
                 Intent intent = new Intent(HomeActivity.this, AllCategoriesActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        // NavigationView içindeki menu öğelerine tıklama olayını dinle
         // NavigationView click listener
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -119,32 +116,28 @@ public class HomeActivity extends AppCompatActivity {
 
     //IŞIL ÇOLAK
     private void updateNavHeader() {
-        // Kullanıcı bilgilerini al
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            // NavigationView'ı bul
+
             NavigationView navigationView = findViewById(R.id.navigationView);
             if (navigationView != null) {
-                // HeaderView'ı bul
+
                 View headerView = navigationView.getHeaderView(0);
                 if (headerView != null) {
-                    // TextView'ları ve ImageView'ı bul
+
                     TextView userEmailTextView = headerView.findViewById(R.id.userEmail);
                     ImageView userImageView = headerView.findViewById(R.id.userImage);
 
                     if (userEmailTextView != null && userImageView != null) {
-                        // User nesnesinden ad, e-posta ve profil fotoğrafı bilgilerini al
                         String userEmail = user.getEmail();
                         String userProfileImage = user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : "";
 
-                        // TextView ve ImageView'ları güncelle
                         userEmailTextView.setText("E-posta: " + userEmail);
 
-                        // Profil fotoğrafını Glide kullanarak yükle
                         Glide.with(this)
                                 .load(userProfileImage)
-                                .placeholder(R.drawable.ttpng) // varsayılan resim
-                                .error(R.drawable.img_cat) // hata durumunda gösterilecek resim
+                                .placeholder(R.drawable.ttpng)
+                                .error(R.drawable.img_cat)
                                 .into(userImageView);
                     }
                 }

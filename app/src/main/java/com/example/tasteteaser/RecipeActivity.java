@@ -109,10 +109,9 @@ public class RecipeActivity extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                // UI işlemlerini güncellemek için Handler kullan
+
                 Handler handler = new Handler(Looper.getMainLooper());
 
-                // Arka plan işlemlerini burada yap
                 String userId = FirebaseAuth.getInstance().getUid();
                 String recipeNameStr = recipeName.getEditText().getText().toString();
                 String recipeIngredientsStr = recipeIngredients.getEditText().getText().toString();
@@ -144,17 +143,13 @@ public class RecipeActivity extends AppCompatActivity {
                         caloriesStr,
                         timeStr
                 );
-                // Firebase'e ekleme işlemi
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference reference = database.getReference("Recipes").push();
                 reference.setValue(newRecipe);
                 addRecipeToCategory(newRecipe.getCategory() , newRecipe);
-                // UI'yi güncelle (örneğin loading modal'ı kapat)
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        // UI işlemleri burada yapılır
-                        // Örneğin loading modal'ı kapat
                         Toast.makeText(RecipeActivity.this, "Recipe Added Successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
