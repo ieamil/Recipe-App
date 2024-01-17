@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    //IŞIL ÇOLAK
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +73,14 @@ public class Login extends AppCompatActivity {
         continueWithoutAccountBtn.setOnClickListener(view -> continueWithoutAccount());
     }
 
+    //IŞIL ÇOLAK
     private void forgotPasswordActivity() {
         Intent intent = new Intent(Login.this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 
 
+    //IŞIL ÇOLAK
     private void loginUser() {
         String email = username.getEditText().getText().toString().trim();
         String pass = password.getEditText().getText().toString().trim();
@@ -96,12 +99,14 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    //IŞIL ÇOLAK
     private void continueWithoutAccount() {
         Intent intent = new Intent(Login.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
 
+    //IŞIL ÇOLAK
     private void checkEmailVerification() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null && firebaseUser.isEmailVerified()) {

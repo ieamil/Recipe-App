@@ -39,9 +39,10 @@ public class RecipeActivity extends AppCompatActivity {
 
     Button addRecipeBtn , addPhotoBtn;
     ImageView backBtn;
-    TextInputLayout recipeName , recipeIngredients , recipeInstruction , calories , time;
+    TextInputLayout recipeName , recipeCategory , recipeIngredients , recipeInstruction , calories , time;
     private boolean imageSelected = false;
 
+    //SERDAR YILDIZ , IŞIL ÇOLAK
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class RecipeActivity extends AppCompatActivity {
         recipeName = findViewById(R.id.recipe_name);
         recipeIngredients = findViewById(R.id.recipe_ingredients);
         recipeInstruction = findViewById(R.id.recipe_instructions);
+        recipeCategory = findViewById(R.id.recipe_categories);
         calories = findViewById(R.id.calories);
         time = findViewById(R.id.time);
 
@@ -63,6 +65,7 @@ public class RecipeActivity extends AppCompatActivity {
                 String recipeNameStr = recipeName.getEditText().getText().toString();
                 String recipeIngredientsStr = recipeIngredients.getEditText().getText().toString();
                 String recipeInstructionStr = recipeInstruction.getEditText().getText().toString();
+                String category = recipeCategory.getEditText().getText().toString();
                 String caloriesStr = calories.getEditText().getText().toString();
                 String timeStr = time.getEditText().getText().toString();
 
@@ -103,6 +106,8 @@ public class RecipeActivity extends AppCompatActivity {
             }
         });
     }
+
+    //SERDAR YILDIZ
     private void addRecipe() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -117,6 +122,7 @@ public class RecipeActivity extends AppCompatActivity {
                 String recipeInstructionStr = recipeInstruction.getEditText().getText().toString();
                 String caloriesStr = calories.getEditText().getText().toString();
                 String timeStr = time.getEditText().getText().toString();
+                String category = recipeCategory.getEditText().getText().toString();
                 String image;
                 if (imageSelected) {
                     image = null;
@@ -135,7 +141,7 @@ public class RecipeActivity extends AppCompatActivity {
                         recipeNameStr,
                         image,
                         "description",
-                        "Soup",
+                        category,
                         recipeInstructionStr,
                         recipeIngredientsStr,
                         caloriesStr,
@@ -160,6 +166,8 @@ public class RecipeActivity extends AppCompatActivity {
         // Thread'i başlat
         thread.start();
     }
+
+    //SERDAR YILDIZ
     private void addRecipeToCategory(String category , Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Category").child(category);
@@ -167,12 +175,14 @@ public class RecipeActivity extends AppCompatActivity {
         newChildRef.child(category).setValue(recipe);
     }
 
+    //SERDAR YILDIZ
     private void uploadImage(){
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference imagesReference = storageRef.child("recipePhotos");
     }
 
+    //SERDAR YILDIZ
     private void saveDataInDataBase(Recipe recipe, String url) {
         recipe.setImage(url);
         // 6. We will save the recipe object in the firebase database.

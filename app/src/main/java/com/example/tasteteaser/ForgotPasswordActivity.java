@@ -65,6 +65,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     // Method to handle the password reset process
+    //IŞIL ÇOLAK
     private void ResetPassword(){
         progressBar.setVisibility(View.VISIBLE);
         btnReset.setVisibility(View.INVISIBLE);

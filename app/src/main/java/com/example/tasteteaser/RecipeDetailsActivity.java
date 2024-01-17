@@ -42,12 +42,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         });
     }
 
+    //IŞIL ÇOLAK
     public void getOnBackPressed() {
         super.onBackPressed();
         // Geri tuşuna basıldığında bir önceki sayfaya geçiş yapacak.
         finish();
     }
 
+    //IŞIL ÇOLAK
     private void init() {
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         binding.tvName.setText(recipe.getName());
@@ -80,6 +82,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         });
     }
 
+    //IŞIL ÇOLAK , SERDAR YILDIZ
     private void updateDataWithFireBase(String recipeId) {
         Log.d("DENEME2 :" , "ID : " + recipeId);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId);
@@ -112,6 +115,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         });
     }
 
+    //SERDAR YILDIZ
     public void findKeyOfRecipe(String recipeName , keyFinderListener listener){
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("Recipes");

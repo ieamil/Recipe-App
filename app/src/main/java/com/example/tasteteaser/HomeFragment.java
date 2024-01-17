@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
         loadRecipes();
     }
 
-
+    //IŞIL ÇOLAK
     private void loadRecipes() {
         // We will load recipes from our database
         binding.rvPopulars.setAdapter(new HorizontalRecipeAdapter());
@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //SERDAR YILDIZ , IŞIL ÇOLAK
     public void loadPopularRecipes(List<Recipe> recipes) {
         List<Recipe> popularRecipes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -77,6 +78,7 @@ public class HomeFragment extends Fragment {
     }
 
 
+    //SERDAR YILDIZ , IŞIL ÇOLAK
     private void loadFoodCategories() {
         binding.rvFoodCategories.setAdapter(new CategoryAdapter());
         ProgressDialog progressDialog = new ProgressDialog(getContext());
@@ -103,6 +105,7 @@ public class HomeFragment extends Fragment {
         binding = null ;
     }
 
+    //SERDAR YILDIZ
     private void getCategories(FunctionLoadedListener listener) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference categoriesData = database.getReference("Category");
@@ -132,6 +135,7 @@ public class HomeFragment extends Fragment {
 
 
 
+    //SERDAR YILDIZ
     public List<Recipe> getRecipesOfCategory(String category , FunctionLoadedListener listener){
         List<Recipe> recipesOfCategory = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();

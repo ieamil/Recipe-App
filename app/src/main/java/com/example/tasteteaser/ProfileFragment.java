@@ -67,6 +67,7 @@ public class ProfileFragment extends Fragment {
         loadUserRecipes();
     }
 
+    //IŞIL ÇOLAK , SERDAR YILDIZ
     private void init() {
         binding.imgProfileEdit.setOnClickListener(v -> {
             // We will pick image from gallery and upload it to firebase storage
@@ -80,6 +81,7 @@ public class ProfileFragment extends Fragment {
         //binding.btnSetting.setOnClickListener(view1 -> startActivity(new Intent(requireContext(), SettingActivity.class)));
     }
 
+    //IŞIL ÇOLAK , SERDAR YILDIZ
     private void uploadImage(Bitmap bitmap) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child("images/" + FirebaseAuth.getInstance().getUid() + "image.jpg");
@@ -109,6 +111,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
+    //IŞIL ÇOLAK , SERDAR YILDIZ
     private void loadUserRecipes() {
         binding.rvProfile.setLayoutManager(new GridLayoutManager(getContext(), 3));
         binding.rvProfile.setAdapter(new RecipeAdapter());
@@ -135,6 +138,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    //IŞIL ÇOLAK
     private void loadProfile() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.child("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).addListenerForSingleValueEvent(new ValueEventListener() {

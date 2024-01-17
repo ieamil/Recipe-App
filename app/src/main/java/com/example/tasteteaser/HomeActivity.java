@@ -117,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    //IŞIL ÇOLAK
     private void updateNavHeader() {
         // Kullanıcı bilgilerini al
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -153,21 +154,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+    //IŞIL ÇOLAK
     private void goToProfile() {
-        //ProfileFragment'ı yarat
         ProfileFragment profileFragment = new ProfileFragment();
-        //FragmentTransaction'ı başlat ve fragmentı yerine koy
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, profileFragment)
-                .addToBackStack(null) // Bu, geri tuşuna basıldığında önceki fragmenta geri dönmek için kullanılır
+                .addToBackStack(null)
                 .commit();
-
-        // Navigation Drawer'ı kapat
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
 
-    // HomeActivity'e geçiş yapacak metot
+    //IŞIL ÇOLAK
     private void goToHomeActivity() {
         // HomeActivity'ye geçiş yap
         Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
@@ -176,12 +174,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // // Logout activity
+    //IŞIL ÇOLAK
     private void performLogout() {
         // Return LoginActivity
         Intent intent = new Intent(HomeActivity.this, Login.class);
         startActivity(intent);
         finish(); // Close HomeActivity
     }
+    //SERDAR YILDIZ
     private List getCategories(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference categoriesData = database.getReference("Categories");

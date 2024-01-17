@@ -15,6 +15,7 @@ public class SignUp extends AppCompatActivity {
     private ActivitySignUpBinding binding;
     private FirebaseAuth firebaseAuth;
 
+    //IŞIL ÇOLAK
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
