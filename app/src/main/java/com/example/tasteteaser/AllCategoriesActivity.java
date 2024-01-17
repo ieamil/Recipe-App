@@ -1,6 +1,5 @@
 package com.example.tasteteaser;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +33,7 @@ public class AllCategoriesActivity extends AppCompatActivity {
         binding = ActivityAllCategoriesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         reference = FirebaseDatabase.getInstance().getReference("Category");
-        binding.rvAllCategories.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.rvAllCategories.setLayoutManager(new GridLayoutManager(this,2));
         binding.rvAllCategories.setAdapter(new CategoryAdapter());
         binding.backBttn.setOnClickListener(new View.OnClickListener() {
             @Override

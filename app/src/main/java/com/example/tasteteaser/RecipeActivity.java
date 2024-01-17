@@ -30,13 +30,10 @@ import com.google.firebase.storage.StorageReference;
 import java.io.ByteArrayOutputStream;
 
 public class RecipeActivity extends AppCompatActivity {
-
     FirebaseStorage storage = FirebaseStorage.getInstance();
     ProgressDialog dialog;
     boolean isEdit;
     String recipeId;
-
-
     Button addRecipeBtn , addPhotoBtn;
     ImageView backBtn;
     TextInputLayout recipeName , recipeIngredients , recipeInstruction , calories , time;
