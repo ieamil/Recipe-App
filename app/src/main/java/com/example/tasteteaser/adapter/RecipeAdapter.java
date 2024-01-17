@@ -27,6 +27,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         notifyDataSetChanged();
     }
 
+    public void setRecipes(List<Recipe> recipeList){
+        this.recipeList = recipeList;
+    }
+
     // Inflates the layout for individual recipe items
     @NonNull
     @Override

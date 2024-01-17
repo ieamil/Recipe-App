@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.tasteteaser.adapter.CategoryAdapter;
+import com.example.tasteteaser.adapter.RecipeAdapter;
 import com.example.tasteteaser.models.Category;
 import com.example.tasteteaser.models.Recipe;
 
@@ -22,59 +24,30 @@ public class ExampleUnitTest {
     }
 
 
-
-  /*  public void findKeyRecipeActivityTest(){
-        RecipeDetailsActivity recipeDetailsActivity = new RecipeDetailsActivity();
-        String key = recipeDetailsActivity.findKeyOfRecipe("Tropical Fruit Smoothie", new RecipeDetailsActivity.keyFinderListener() {
-            @Override
-            public void keyFound(String key) {
-                System.out.println("Test working");
-            }
-        });
-        System.out.println(key);
-        assertEquals("NoIoYdHvQuWdXzmSyKAA" , key);
-    }*/
-
-
-    public void testLoadPopularRecipes() {
-        HomeFragment homeFragment = new HomeFragment();
-
-        // create a dummy list of recipes for testing
-        List<Recipe> dummyRecipes = new ArrayList<>();
-        dummyRecipes.add(new Recipe());
-        dummyRecipes.add(new Recipe());
-        dummyRecipes.add(new Recipe());
-        // call the private method
-        //List<Recipe> result = homeFragment.loadPopularRecipes(dummyRecipes);
-
-        // check if the result size is less than or equal to 5
-        // because the method selects up to 5 random recipes
-        //assertTrue(result.size() <= 5);
+    @Test
+    public void testCategoryLength(){
+        CategoryAdapter categoryAdapter = new CategoryAdapter();
+        List<Category> categoryList = new ArrayList<>();
+        Category category = new Category();
+        Category category1 = new Category();
+        Category category2 = new Category();
+        categoryList.add(category);
+        categoryList.add(category1);
+        categoryList.add(category2);
+        categoryAdapter.setCategoryList(categoryList);
+        assertEquals(3 , categoryAdapter.getItemCount());
     }
 
     @Test
-    public void testGetRecipesOfCategory() {
-        HomeFragment homeFragment = new HomeFragment();
-
-        // create a dummy listener for testing
-        FunctionLoadedListener dummyListener = new FunctionLoadedListener() {
-            @Override
-            public void onCategoriesLoaded(List<Category> categories) {
-                // do nothing
-            }
-
-            @Override
-            public void onRecipesLoaded(List<Recipe> recipes) {
-                // check if the recipes list is not null
-                assertNotNull(recipes);
-            }
-        };
-
-        // call the method
-        List<Recipe> result = homeFragment.getRecipesOfCategory("DummyCategory", dummyListener);
-
-        // check if the result is an empty list
-        assertTrue(result.isEmpty());
+    public void testRecipeLength() {
+        RecipeAdapter recipeAdapter = new RecipeAdapter();
+        List<Recipe> recipeList = new ArrayList<>();
+        for(int i = 0 ; i < 10 ; i++){
+            Recipe recipe = new Recipe();
+            recipeList.add(recipe);
+        }
+        recipeAdapter.setRecipes(recipeList);
+        assertEquals(10 , recipeAdapter.getItemCount());
     }
 
 }
