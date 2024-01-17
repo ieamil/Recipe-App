@@ -162,24 +162,13 @@ public class RecipeActivity extends AppCompatActivity {
                 });
             }
         });
-
         // Thread'i başlat
         thread.start();
-
     }
-
     private void addRecipeToCategory(String category , Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Category").child(category);
         DatabaseReference newChildRef = reference.push();
         newChildRef.child(category).setValue(recipe);
     }
-
-
-    private void uploadImage(){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        StorageReference imagesReference = storageRef.child("recipePhotos");
-    }
-
 }
