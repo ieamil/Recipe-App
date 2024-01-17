@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void loadPopularRecipes(List<Recipe> recipes) {
+    public void loadPopularRecipes(List<Recipe> recipes) {
         List<Recipe> popularRecipes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             int random = (int) (Math.random() * recipes.size());
@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment {
 
 
 
-    private List<Recipe> getRecipesOfCategory(String category , FunctionLoadedListener listener){
+    public List<Recipe> getRecipesOfCategory(String category , FunctionLoadedListener listener){
         List<Recipe> recipesOfCategory = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Category").child(category);

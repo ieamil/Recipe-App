@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,19 +27,35 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
     ActivityRecipeDetailsBinding binding;
+    ImageView backBtn;
+    String recipeKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRecipeDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
+
+        backBtn = findViewById(R.id.details_back_button);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecipeDetailsActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         binding.tvName.setText(recipe.getName());
-        binding.tcCategory.setText(recipe.getCategory());
-        binding.tvDescription.setText(recipe.getDescription());
+        binding.tcTime.setText(recipe.getTime());
+        binding.tvDescription.setText(recipe.getInstructions());
+        Log.d("DENEME" , "DENEME : " + recipe.getName());
+        Log.d("DENEME" , "DENEME : " + recipe.getCalories());
+        Log.d("DENEME" , "DENEME : " + recipe.getTime());
+        Log.d("DENEME" , "DENEME : " + recipe.getInstructions());
         binding.tvCalories.setText(String.format("%s Calories", recipe.getCalories()));
         Glide
                 .with(RecipeDetailsActivity.this)
@@ -88,8 +105,79 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     .show();
         });
 
-        updateDataWithFireBase(findKeyOfRecipe(recipe.getName()));
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Recipe is loading...");
+        if(!isFinishing()){
+            progressDialog.show();
+        }
+        findKeyOfRecipe(recipe.getName(), new keyFinderListener() {
+            @Override
+            public void keyFound(String key) {
+                updateDataWithFireBase(recipeKey);
+                progressDialog.dismiss();
+            }
+        });
     }
+
+    private void updateDataWithFireBase(String recipeId) {
+        Log.d("DENEME2 :" , "ID : " + recipeId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId);
+        Log.d("Recipe ID :" , "ID : " + recipeId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Recipe recipe = snapshot.getValue(Recipe.class);
+                binding.tvName.setText(recipe.getName());
+                binding.tcTime.setText(recipe.getCategory());
+                //binding.tvDescription.setText(recipe.getDescription());
+                Log.d("DENEME2" , "UPDATEDATA KEY :" + recipeKey);
+                Log.d("DENEME2" , "DENEME2 : " + recipe.getName());
+                Log.d("DENEME2" , "DENEME2 : " + recipe.getCalories());
+                Log.d("DENEME2" , "DENEME2 : " + recipe.getTime());
+                Log.d("DENEME2" , "DENEME2 : " + recipe.getInstructions());
+                binding.tvCalories.setText(String.format("%s Calories", recipe.getCalories()));
+                Glide
+                        .with(RecipeDetailsActivity.this)
+                        .load(recipe.getImage())
+                        .centerCrop()
+                        .placeholder(R.drawable.meatrecipe)
+                        .into(binding.imgRecipe);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("TAG", "onCancelled: ", error.toException());
+            }
+        });
+    }
+
+    public void findKeyOfRecipe(String recipeName , keyFinderListener listener){
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference reference = database.getReference("Recipes");
+    final String[] key = {""};  //its final and Array style String because we can't acces this from onDataChange method.
+    reference.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                if(recipe.getName().equals(recipeName)){
+                    key[0] = dataSnapshot.getKey();
+                    recipeKey = key[0];
+                    listener.keyFound(key[0]);
+                    Log.d("DENEME2" , "DENEME2 key :" + key[0]);
+                    Log.d("DENEME2" , "DENEME2 :" + recipe.getName());
+                }
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            Log.e("find key of recipe error " , error.getMessage());
+        }
+    });
+        Log.d("DENEME" , "RECIPE KEY : " + recipeKey);
+    }
+
 
 //private void checkFavorite(Recipe recipe) {
 //    RecipeRepository repository = new RecipeRepository(getApplication());
@@ -113,52 +201,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     //    }
     //}
 
-    private void updateDataWithFireBase(String recipeId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId);
-        Log.d("Recipe ID :" , "ID : " + recipeId);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Recipe recipe = snapshot.getValue(Recipe.class);
-                binding.tvName.setText(recipe.getName());
-                binding.tcCategory.setText(recipe.getCategory());
-                //binding.tvDescription.setText(recipe.getDescription());
-                binding.tvCalories.setText(String.format("%s Calories", recipe.getCalories()));
-                Glide
-                        .with(RecipeDetailsActivity.this)
-                        .load(recipe.getImage())
-                        .centerCrop()
-                        .placeholder(R.drawable.meatrecipe)
-                        .into(binding.imgRecipe);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("TAG", "onCancelled: ", error.toException());
-            }
-        });
-    }
-
-    private String findKeyOfRecipe(String recipeName){
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference reference = database.getReference("Recipes");
-    final String[] key = {""};  //its final and Array style String because we can't acces this from onDataChange method.
-    reference.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                if(recipe.getName().equals(recipeName)){
-                    key[0] = snapshot.getKey();
-                }
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-            Log.e("find key of recipe error " , error.getMessage());
-        }
-    });
-        return key[0];
+ interface keyFinderListener{
+        void keyFound(String key);
     }
 }
