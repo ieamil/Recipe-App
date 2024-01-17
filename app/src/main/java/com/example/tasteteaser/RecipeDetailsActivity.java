@@ -41,10 +41,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipeDetailsActivity.this, HomeActivity.class);
-                startActivity(intent);
+                getOnBackPressed();
             }
         });
+    }
+
+    public void getOnBackPressed() {
+        super.onBackPressed();
+        // Geri tuşuna basıldığında bir önceki sayfaya geçiş yapacak.
+        finish();
     }
 
     private void init() {

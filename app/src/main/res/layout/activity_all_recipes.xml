@@ -6,16 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".AllRecipesActivity">
 
+    <LinearLayout
+        android:id="@+id/up_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backBttn"
+            android:layout_width="71dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="0"
+            android:baselineAligned="false"
+            android:src="@drawable/ic_backhome"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/ttLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:src="@drawable/taste_teaser_logo_letter_png_white_big" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Take a look at the most\n delicious recipes in this category!"
         android:textSize="22sp"
-        android:text="Discover new flavors\nand elevate your cooking game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/up_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recipes"

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -89,7 +90,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
  */
         public void onBind(Category category){
             binding.categoryRecipeName.setText(category.getName());
-            Glide.with(binding.getRoot().getContext())
+            Glide
+                    .with(binding.getRoot().getContext())
                     .load(category.getImage())
                     .centerCrop()
                     .placeholder(R.drawable.meatrecipe)
@@ -103,6 +105,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     intent.putExtra("category", category.getName());
                     binding.getRoot().getContext().startActivity(intent);
                 }
+
             });
         }
     }

@@ -1,7 +1,10 @@
 package com.example.tasteteaser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,8 @@ public class AllRecipesActivity extends AppCompatActivity {
     ActivityAllRecipesBinding binding;
     DatabaseReference reference;
     String type;
+    ImageView backBttn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,14 @@ public class AllRecipesActivity extends AppCompatActivity {
         binding.rvRecipes.setLayoutManager(new GridLayoutManager(this,2));
         binding.rvRecipes.setAdapter(new RecipeAdapter());
         type = getIntent().getStringExtra("type");
+        backBttn = findViewById(R.id.backBttn);
+        backBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AllRecipesActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -96,9 +109,19 @@ public class AllRecipesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // Sayfadan geriye çıkma işlemini buraya ekleyebilirsiniz.
+        finish(); // Bu,mevcut aktiviteyi kapatır ve bir önceki aktiviteye geri döner.
+    }
+
+
+
     private void filterByCategory() {
-        // Filter Recipes by Category
         String category = getIntent().getStringExtra("category");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
         reference.orderByChild("category").equalTo(category).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -118,6 +141,6 @@ public class AllRecipesActivity extends AppCompatActivity {
                 Log.e("Error", error.getMessage());
             }
         });
-
     }
+
 }
