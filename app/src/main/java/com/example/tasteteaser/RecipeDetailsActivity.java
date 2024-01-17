@@ -2,21 +2,17 @@ package com.example.tasteteaser;
 
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.tasteteaser.databinding.ActivityRecipeDetailsBinding;
 import com.example.tasteteaser.models.Recipe;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +32,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         init();
 
-        backBtn = findViewById(R.id.details_back_button);
+        backBtn = findViewById(R.id.backBtn);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,46 +65,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 .placeholder(R.drawable.meatrecipe)
                 .into(binding.imgRecipe);
 
-        if (recipe.getId().equalsIgnoreCase(FirebaseAuth.getInstance().getUid())) {
-            binding.imgEdit.setVisibility(View.VISIBLE);
-            binding.btnDelete.setVisibility(View.VISIBLE);
-        } else {
-            binding.imgEdit.setVisibility(View.GONE);
-            binding.btnDelete.setVisibility(View.GONE);
-        }
-
-        binding.imgEdit.setOnClickListener(view -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), RecipeActivity.class);
-            intent.putExtra("recipe", recipe);
-            intent.putExtra("isEdit", true);
-            binding.getRoot().getContext().startActivity(intent);
-        });
-        //checkFavorite(recipe);
-        //binding.imgFvrt.setOnClickListener(view -> favouriteRecipe(recipe));
-
-        binding.btnDelete.setOnClickListener(view -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Delete Recipe")
-                    .setMessage("Are you sure you want to delete this recipe?")
-                    .setPositiveButton("Yes", (dialogInterface, i) -> {
-                        ProgressDialog dialog = new ProgressDialog(this);
-                        dialog.setMessage("Deleting...");
-                        dialog.setCancelable(false);
-                        dialog.show();
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
-                        reference.child(recipe.getId()).removeValue().addOnCompleteListener(task -> {
-                            dialog.dismiss();
-                            if (task.isSuccessful()) {
-                                Toast.makeText(this, "Recipe Deleted Successfully", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else {
-                                Toast.makeText(this, "Failed to delete recipe", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    })
-                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss())
-                    .show();
-        });
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Recipe is loading...");

@@ -28,6 +28,12 @@
             android:screenOrientation="sensor"
             android:theme="@style/Base.Theme.TasteTeaser" />
         <activity
+            android:name=".AllCategoriesActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="sensor"
+            android:theme="@style/Base.Theme.TasteTeaser" />
+        <activity
             android:name=".Login"
             android:configChanges="orientation|screenSize"
             android:exported="true"

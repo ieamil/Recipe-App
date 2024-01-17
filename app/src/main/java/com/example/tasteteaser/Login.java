@@ -94,14 +94,6 @@ public class Login extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
         }
-        /*
-        Intent navIntent = new Intent(Login.this , NavMainActivity.class);
-        navIntent.putExtra("email" , email);
-        navIntent.putExtra("isUserLogged" , isUserLogged);
-        Intent homeIntent = new Intent(Login.this , HomeActivity.class);
-        homeIntent.putExtra("isUserLogged" , isUserLogged);
-
-         */
     }
 
     private void continueWithoutAccount() {

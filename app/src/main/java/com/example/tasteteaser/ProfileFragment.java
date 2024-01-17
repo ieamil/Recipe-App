@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment {
 
 
     private void loadUserRecipes() {
-        binding.rvProfile.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        binding.rvProfile.setLayoutManager(new GridLayoutManager(getContext(), 3));
         binding.rvProfile.setAdapter(new RecipeAdapter());
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
 
@@ -121,7 +121,6 @@ public class ProfileFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     //Recipe recipe = new Recipe("" , "" , "" , "" , "" , "" , "" , "" , "");
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                    //Log.d("Recipeee" , "asdasd   " + dataSnapshot.getValue(Recipe.class));
                     if(recipe.getId().equals(FirebaseAuth.getInstance().getUid())){
                         recipes.add(recipe);
                     }
@@ -161,8 +160,8 @@ public class ProfileFragment extends Fragment {
             }
         });
         User user = new User(); // Load From Firebase here, we will learn it in next video
-        user.setName("Hashmac");
-        user.setEmail("info@hashmac.com");
+        user.setName("Name Surname");
+        user.setEmail("mobileproject@gmail.com");
         binding.tvUserName.setText(user.getName());
         binding.tvUserEmail.setText(user.getEmail());
         // We will load images later, whenever we add firebase database

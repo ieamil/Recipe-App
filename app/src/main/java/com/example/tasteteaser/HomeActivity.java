@@ -7,19 +7,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.tasteteaser.adapter.CategoryAdapter;
-import com.example.tasteteaser.databinding.ActivityHomeBinding;
+import com.bumptech.glide.Glide;
 import com.example.tasteteaser.models.Category;
+import com.example.tasteteaser.models.User;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,15 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/*
-* Firebase storage kullanarak recipe fotoğraflarını yükleme işlemlerini yaptırıcan
- */
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ImageView menuIcon;
     private NavigationView navigationView;
     private Button addRecipeBtn;
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         // DrawerLayout, menuIcon ve NavigationView'u tanımla
         drawerLayout = findViewById(R.id.drawerLayout);
         menuIcon = findViewById(R.id.menuIcon);
+        updateNavHeader();
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
@@ -62,19 +58,6 @@ public class HomeActivity extends AppCompatActivity {
         }else{
             navigationView = findViewById(R.id.nonAccountNavigationView);
         }
-
-        /*
-        Intent loginIntent = getIntent();
-        boolean isUserLogged = loginIntent.getBooleanExtra("isUserLogged" , false);
-        Log.d("isUserLogged" , String.valueOf(isUserLogged));
-        if(isUserLogged){
-            navigationView = findViewById(R.id.navigationView);
-        }else{
-            navigationView = findViewById(R.id.nonAccountNavigationView);
-            Log.d("Navigationasdasd", String.valueOf(navigationView));
-        }
-*/
-
         // menuIcon click listener
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +78,15 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this , RecipeActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        TextView tvSeeAllCategories = findViewById(R.id.tv_see_all_categories);
+        tvSeeAllCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Kullanıcı "See All"e tıkladığında ActivityAllCategories'e geçiş yap
+                Intent intent = new Intent(HomeActivity.this, AllCategoriesActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -124,6 +116,42 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    private void updateNavHeader() {
+        // Kullanıcı bilgilerini al
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // NavigationView'ı bul
+            NavigationView navigationView = findViewById(R.id.navigationView);
+            if (navigationView != null) {
+                // HeaderView'ı bul
+                View headerView = navigationView.getHeaderView(0);
+                if (headerView != null) {
+                    // TextView'ları ve ImageView'ı bul
+                    TextView userEmailTextView = headerView.findViewById(R.id.userEmail);
+                    ImageView userImageView = headerView.findViewById(R.id.userImage);
+
+                    if (userEmailTextView != null && userImageView != null) {
+                        // User nesnesinden ad, e-posta ve profil fotoğrafı bilgilerini al
+                        String userEmail = user.getEmail();
+                        String userProfileImage = user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : "";
+
+                        // TextView ve ImageView'ları güncelle
+                        userEmailTextView.setText("E-posta: " + userEmail);
+
+                        // Profil fotoğrafını Glide kullanarak yükle
+                        Glide.with(this)
+                                .load(userProfileImage)
+                                .placeholder(R.drawable.ttpng) // varsayılan resim
+                                .error(R.drawable.img_cat) // hata durumunda gösterilecek resim
+                                .into(userImageView);
+                    }
+                }
+            }
+        }
+    }
+
+
 
     private void goToProfile() {
         //ProfileFragment'ı yarat
@@ -176,6 +204,4 @@ public class HomeActivity extends AppCompatActivity {
         });
         return categories;
     }
-
-
 }

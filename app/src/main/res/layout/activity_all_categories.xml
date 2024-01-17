@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/up_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:background="@color/black"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,18 +18,18 @@
             android:id="@+id/backBttn"
             android:layout_width="71dp"
             android:layout_height="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="0"
             android:baselineAligned="false"
-            android:src="@drawable/ic_backhome"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:src="@drawable/ic_backhome" />
 
         <ImageView
             android:id="@+id/ttLogo"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="70dp"
             android:layout_marginBottom="4dp"
@@ -38,31 +38,16 @@
             android:src="@drawable/taste_teaser_logo_letter_png_white_big" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="Take a look at the most\n delicious recipes in this category!"
-        android:textSize="22sp"
-        android:textStyle="italic"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_bar" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_recipes"
+        android:id="@+id/rv_all_categories"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/up_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
