@@ -27,12 +27,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryHolder> {
 
     List<Category> categoryList = new ArrayList<>();
 
     public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+        notifyDataSetChanged();
+    }
+
+    public void setCategories(List<Category> categoryList){
         this.categoryList = categoryList;
     }
 
@@ -51,29 +57,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public int getItemCount() {
         return categoryList.size();
-    }
-
-    private void getCategories(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference categoriesData = database.getReference("Categories");
-        categoriesData.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Category category = dataSnapshot.getValue(Category.class);
-                    categoryList.add(category);
-                }
-                Log.d("GETCATEGORY : " , "asdasd\n" + categoryList);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Get Categories Error " ,error.getMessage());
-                return;
-            }
-        });
     }
 
     public static class CategoryHolder extends RecyclerView.ViewHolder {

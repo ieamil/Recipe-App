@@ -1,5 +1,6 @@
 package com.example.tasteteaser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,11 +33,9 @@ public class AllCategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAllCategoriesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         reference = FirebaseDatabase.getInstance().getReference("Category");
         binding.rvAllCategories.setLayoutManager(new GridLayoutManager(this, 2));
         binding.rvAllCategories.setAdapter(new CategoryAdapter());
-
         binding.backBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,31 +44,32 @@ public class AllCategoriesActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         loadAllCategories();
     }
 
-    private void loadAllCategories() {
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Category> categories = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Category category = dataSnapshot.getValue(Category.class);
-                    categories.add(category);
+        private void loadAllCategories() {
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<Category> categories = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Category category = dataSnapshot.getValue(Category.class);
+                        categories.add(category);
+                    }
+                    CategoryAdapter adapter = (CategoryAdapter) binding.rvAllCategories.getAdapter();
+                    if (adapter != null) {
+                        adapter.setCategoryList(categories);
+                    }
                 }
-                CategoryAdapter adapter = (CategoryAdapter) binding.rvAllCategories.getAdapter();
-                if (adapter != null) {
-                    adapter.setCategoryList(categories);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Error", error.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("Error", error.getMessage());
+                }
+            });
+        }
     }
-}

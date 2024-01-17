@@ -34,10 +34,10 @@ public class ExampleUnitTest {
         categoryList.add(category);
         categoryList.add(category1);
         categoryList.add(category2);
-        categoryAdapter.setCategoryList(categoryList);
+        categoryAdapter.setCategories(categoryList);
         assertEquals(3 , categoryAdapter.getItemCount());
     }
-
+    
     @Test
     public void testRecipeLength() {
         RecipeAdapter recipeAdapter = new RecipeAdapter();

@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
     private void loadFoodCategories() {
         binding.rvFoodCategories.setAdapter(new CategoryAdapter());
         ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Categories are loading...");
+        progressDialog.setMessage("Perfect recipes are loading...");
         progressDialog.show();
         getCategories(new FunctionLoadedListener() {
             @Override
