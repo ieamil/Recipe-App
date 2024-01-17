@@ -88,7 +88,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     .show();
         });
 
-        updateDataWithFireBase(recipe.getId());
+        updateDataWithFireBase(findKeyOfRecipe(recipe.getName()));
     }
 
 //private void checkFavorite(Recipe recipe) {
@@ -114,14 +114,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     //}
 
     private void updateDataWithFireBase(String recipeId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child("recipeId");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId);
+        Log.d("Recipe ID :" , "ID : " + recipeId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Recipe recipe = snapshot.getValue(Recipe.class);
                 binding.tvName.setText(recipe.getName());
                 binding.tcCategory.setText(recipe.getCategory());
-                binding.tvDescription.setText(recipe.getDescription());
+                //binding.tvDescription.setText(recipe.getDescription());
                 binding.tvCalories.setText(String.format("%s Calories", recipe.getCalories()));
                 Glide
                         .with(RecipeDetailsActivity.this)
@@ -136,5 +137,28 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 Log.e("TAG", "onCancelled: ", error.toException());
             }
         });
+    }
+
+    private String findKeyOfRecipe(String recipeName){
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference reference = database.getReference("Recipes");
+    final String[] key = {""};  //its final and Array style String because we can't acces this from onDataChange method.
+    reference.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                if(recipe.getName().equals(recipeName)){
+                    key[0] = snapshot.getKey();
+                }
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            Log.e("find key of recipe error " , error.getMessage());
+        }
+    });
+        return key[0];
     }
 }
