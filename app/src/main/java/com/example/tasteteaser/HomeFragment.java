@@ -41,21 +41,6 @@ public class HomeFragment extends Fragment {
         loadRecipes();
     }
 
-//private void loadPopularRecipes() {
-//    binding.rvPopulars.setAdapter(new RecipeAdapter()); //Category Adapter yapacağız burayı
-//    popularRecipes = new ArrayList<>();
-//    popularRecipes.add(new Recipe("1","Popular One","meatrecipe","null","Popular",
-//            "null","","",""));
-//    popularRecipes.add(new Recipe("2","Popular 2","meatrecipe","null","Popular",
-//            "null","","",""));
-//    popularRecipes.add(new Recipe("3","Popular 3","meatr","null","Popular",
-//            "null","","",""));
-//    RecipeAdapter adapter =(RecipeAdapter) binding.rvPopulars.getAdapter();
-//    if (adapter != null){
-//        adapter.setRecipeList(popularRecipes);
-//        adapter.notifyDataSetChanged();
-//    }
-//}
 
     private void loadRecipes() {
         // We will load recipes from our database
